@@ -1,0 +1,11 @@
+hello
+
+<ul>
+    <li>
+    <%= for notifier <- @notifiers do  %>
+        <%= link to: notifier_path(@conn, :show, notifier) do %>
+            <%= notifier.id %>
+        <%= end %>
+    <%= end %>
+    </li>
+</ul>

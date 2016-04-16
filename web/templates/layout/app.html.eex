@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <title>Notifilter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Hello Phoenix!</title>
-    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>")>
   </head>
-
   <body>
-    <div class="container" role="main">
-      <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
-        </ul>
-        <span class="logo"></span>
+      <header id="navigation">
+          <div id="navigation-content">
+              <h1 class="navbar-brand">
+                  <a id="logo" href="/">Notifilter</a>
+              </h1>
+
+              <ul class="navbar">
+                  <li><%= link "New notification", to: "#" %></li>
+                  <li><%= link "Latest events", to: "#" %></li>
+                  <li><%= link "Statistics", to: "#" %></li>
+              </ul>
+
+              <ul class="navbar pull-right">
+              </ul>
+          </div>
+      </header>
+
+      <div id="main-content">
+          <%= @inner %>
       </div>
 
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
-      <%= @inner %>
-
-    </div> <!-- /container -->
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+      <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,900,300italic,400italic,600italic,700italic,800italic,900italic&subset=latin">
+      <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

@@ -1,0 +1,6 @@
+id: <%= @notifier.id %><br>
+application: <%= @notifier.application %><br>
+eventName: <%= @notifier.event_name %><br>
+target: <%= @notifier.target %><br>
+template: <%= @notifier.template %><br>
+rules: <%= @notifier.rules %><br>
