@@ -13,7 +13,7 @@
       <header id="navigation">
           <div id="navigation-content">
               <h1 class="navbar-brand">
-                  <a id="logo" href="/">Notifilter</a>
+                  <%= link "Notifilter", to: notifier_path(@conn, :index), id: "logo" %>
               </h1>
 
               <ul class="navbar">

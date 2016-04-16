@@ -16,7 +16,7 @@ defmodule Notifilter.Router do
   scope "/", Notifilter do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", NotifierController, :index
 
     resources "/notifiers", NotifierController
   end
