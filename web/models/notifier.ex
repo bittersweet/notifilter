@@ -1,6 +1,8 @@
 defmodule Notifilter.Notifier do
   use Ecto.Model
 
+  @derive {Poison.Encoder, except: [:__meta__]}
+
   schema "notifiers" do
     field :application, :string
     field :event_name, :string

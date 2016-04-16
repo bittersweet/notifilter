@@ -13,6 +13,7 @@ defmodule Notifilter.NotifierController do
 
   def show(conn, %{"id" => id}) do
     notifier = Repo.get!(Notifier, id)
-    render conn, "show.html", notifier: notifier
+    {:ok, notifier_as_json} = notifier |> Map.from_struct |> Map.drop([:__meta__]) |> Poison.encode
+    render conn, "show.html", notifier: notifier, notifier_as_json: notifier_as_json
   end
 end

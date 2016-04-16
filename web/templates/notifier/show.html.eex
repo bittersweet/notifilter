@@ -1,6 +1,14 @@
-id: <%= @notifier.id %><br>
-application: <%= @notifier.application %><br>
-eventName: <%= @notifier.event_name %><br>
-target: <%= @notifier.target %><br>
-template: <%= @notifier.template %><br>
-rules: <%= @notifier.rules %><br>
+<script>
+    window.options = {
+        applications: ['one'],
+        eventNames: ['conversion'],
+        keys: ['name'],
+    };
+
+    window.notifier = <%= raw @notifier_as_json %>;
+</script>
+
+<div id="rules">
+    <div id="content"></div>
+</div>
+<script src="<%= static_path(@conn, "/js/rules.js") %>"></script>
