@@ -1,0 +1,3 @@
+<pre><%= @event %></pre>
+
+<%= link "Back to events", to: event_path(@conn, :index) %>

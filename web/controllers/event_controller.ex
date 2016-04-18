@@ -4,7 +4,12 @@ defmodule Notifilter.EventController do
   alias Notifilter.Elasticsearch
 
   def index(conn, _params) do
-    status = Elasticsearch.status
-    render conn, "index.html", status: status
+    events = Elasticsearch.latest_events
+    render conn, "index.html", events: events
+  end
+
+  def show(conn, %{"id" => id}) do
+    event = Elasticsearch.event(id)
+    render conn, "show.html", event: event
   end
 end

@@ -1,2 +1,8 @@
 Events
-<%= @status["tagline"] %>
+<ul>
+    <%= for event <- @events["hits"]["hits"] do %>
+        <li>
+            <%= link event["_id"], to: event_path(@conn, :show, event["_id"]) %>
+        </li>
+    <%= end  %>
+</ul>

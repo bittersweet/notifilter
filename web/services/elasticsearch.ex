@@ -11,6 +11,13 @@ defmodule Notifilter.Elasticsearch do
     |> handle_response
   end
 
+  def event(event) do
+    url = "localhost:9200/notifilter/event/#{event}?pretty=true"
+    {:ok, response} = HTTPoison.get(url, [])
+    event = Poison.decode!(response.body)
+    Poison.encode!(event["_source"]["data"], pretty: true)
+  end
+
   def handle_response({ :error, response }) do
   end
 
