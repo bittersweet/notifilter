@@ -10,6 +10,7 @@ defmodule Notifilter.EventController do
 
   def show(conn, %{"id" => id}) do
     event = Elasticsearch.event(id)
-    render conn, "show.html", event: event
+    data = Poison.encode!(event["data"], pretty: true)
+    render conn, "show.html", event: event, data: data
   end
 end

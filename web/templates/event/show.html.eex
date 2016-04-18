@@ -1,3 +1,8 @@
-<pre><%= @event %></pre>
+<ul>
+    <li>Application: <strong><%= @event["application"] %></strong>
+    <li>Event: <strong><%= @event["name"] %></strong>
+    <li>Received At: <strong><%= @event["received_at"] %></strong>
+</ul>
+<pre><%= @data %></pre>
 
 <%= link "Back to events", to: event_path(@conn, :index) %>
