@@ -19,6 +19,7 @@ defmodule Notifilter.Router do
     get "/", NotifierController, :index
 
     resources "/notifiers", NotifierController
+    resources "/events", EventController
   end
 
   # Other scopes may use custom stacks.
