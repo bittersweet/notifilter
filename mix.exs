@@ -19,7 +19,7 @@ defmodule Notifilter.Mixfile do
   def application do
     [mod: {Notifilter, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex]]
+                    :phoenix_ecto, :postgrex, :httpoison]]
   end
 
   # Specifies which paths to compile per environment.
@@ -35,7 +35,8 @@ defmodule Notifilter.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 2.1"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:cowboy, "~> 1.0"}]
+     {:cowboy, "~> 1.0"},
+     {:httpoison, "~> 0.8.2"}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
