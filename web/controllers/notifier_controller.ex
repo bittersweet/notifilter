@@ -7,7 +7,8 @@ defmodule Notifilter.NotifierController do
   alias Notifilter.Elasticsearch
 
   def index(conn, _params) do
-    notifiers = Repo.all(Notifier)
+    query = from n in Notifier, order_by: [asc: n.id]
+    notifiers = Repo.all(query)
     query = from n in Notifier, select: count(n.id)
     count = Repo.one(query)
     render conn, "index.html", count: count, notifiers: notifiers
@@ -23,7 +24,6 @@ defmodule Notifilter.NotifierController do
 
   def create(conn, %{"notifier" => notifier_params}) do
     notifier_params = Map.put(notifier_params, "notification_type", "slack")
-    # IEx.pry
     changeset = Notifier.changeset(%Notifier{}, notifier_params)
 
     case Repo.insert(changeset) do
