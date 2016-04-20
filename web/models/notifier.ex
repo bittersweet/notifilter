@@ -13,4 +13,11 @@ defmodule Notifilter.Notifier do
 
     # timestamps(inserted_at: :created_at)
   end
+
+  @required_fields ~w(application event_name template rules notification_type target)
+  @optional_fields ~w()
+  def changeset(model, params \\ :empty) do
+    model
+    |> cast(params, @required_fields, @optional_fields)
+  end
 end
