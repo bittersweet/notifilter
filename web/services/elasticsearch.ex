@@ -20,6 +20,30 @@ defmodule Notifilter.Elasticsearch do
   @doc """
   Query ES for all known applications we have seen so far.
   """
+  def get_fields(field) do
+    url = "localhost:9200/notifilter/event/_search"
+    headers = []
+    query = %{
+      "size": 0,
+      "aggs": %{
+        "field": %{
+          "terms": %{
+            "field": field,
+            "size": 0, # Make sure we get all results, not limited
+            "order": %{
+              "_term": "asc"
+            }
+            }
+          }
+      }
+    }
+    body = Poison.encode!(query)
+    {:ok, response} = HTTPoison.post(url, body, headers)
+    result = Poison.decode!(response.body)
+    keys = result["aggregations"]["field"]["buckets"]
+    Enum.map(keys, fn(bucket) -> bucket["key"] end)
+  end
+
   def applications do
     url = "localhost:9200/notifilter/event/_search"
     headers = []

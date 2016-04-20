@@ -1,7 +1,7 @@
 <script>
     window.options = {
-        applications: ['one'],
-        eventNames: ['conversion'],
+        applications: <%= raw @applications %>,
+        eventNames: <%= raw @event_names %>,
         keys: ['name'],
     };
 
