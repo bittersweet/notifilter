@@ -23,12 +23,10 @@ var SubmitButton = React.createClass({
     if (id) {
       var url = `/notifiers/${id}`;
       jsonMethod = 'PATCH';
-      console.log("Setting method to patch");
     } else {
       // Not persisted yet
       var url = `/notifiers`;
       jsonMethod = 'POST';
-      console.log("Setting method to post");
     }
     fetch(url, {
       method: jsonMethod,
