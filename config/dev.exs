@@ -12,7 +12,7 @@ config :notifilter, Notifilter.Endpoint,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
-  watchers: []
+  watchers: [npm: ["start"]]
 
 # Watch static and templates for browser reloading.
 config :notifilter, Notifilter.Endpoint,
