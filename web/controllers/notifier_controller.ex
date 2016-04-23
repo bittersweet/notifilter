@@ -39,7 +39,7 @@ defmodule Notifilter.NotifierController do
   end
 
   def new(conn, _params) do
-    notifier = %Notifier{}
+    notifier = %Notifier{application: "", target: "", template: "", event_name: ""}
     applications = Poison.encode!(Elasticsearch.get_fields("application"))
     event_names = Poison.encode!(Elasticsearch.get_fields("name"))
     {:ok, notifier_as_json} = notifier |> Map.from_struct |> Map.drop([:__meta__]) |> Poison.encode
