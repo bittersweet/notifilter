@@ -12,8 +12,8 @@ config :logger, level: :warn
 # Configure your database
 config :notifilter, Notifilter.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "postgres",
+  username: "markmulder",
+  password: "markmulder",
   database: "notifilter_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
