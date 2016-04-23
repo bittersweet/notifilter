@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
+  </head>
+  <body>
+    <script>
+      window.options = {
+        applications: ['test_app', 'production'],
+        eventNames: ['signup', 'comment'],
+        keys: ["mark", "exists", "test"],
+      };
+
+      window.notifier = {
+        id: null,
+        application: null,
+        eventName: null,
+        target: null,
+        template: null,
+        rules: [],
+      };
+    </script>
+    <div>
+      <div id="content"></div>
+    </div>
+  </body>
+
+  <script src="index.js"></script>
+</html>
