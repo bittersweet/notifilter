@@ -17,6 +17,9 @@ import * as RuleActions from './actions';
 var App = React.createClass({
   render: function() {
       console.log("props in app:", this.props);
+      // Note we use event_name here but pass it in as props as eventName, we
+      // store it as event_name in the database, we can transform it in the
+      // controller but this is easier for now.
     const { dispatch, rules, application, event_name, target, template } = this.props;
     const actions = bindActionCreators(RuleActions, dispatch);
 
