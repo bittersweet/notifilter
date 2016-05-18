@@ -40,3 +40,8 @@ config :notifilter, Notifilter.Repo,
   database: "notifilter_development",
   hostname: "localhost",
   pool_size: 10
+
+config :notifilter, Google,
+  client_id: "157898138924-nsj05uf8gpfj1hj7pibjr6n2cqn4ikm9.apps.googleusercontent.com",
+  client_secret: "an2WQjrNjQYjgOX158uG_XCF",
+  redirect_uri: "http://localhost:4000/auth/google/callback"

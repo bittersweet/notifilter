@@ -23,6 +23,7 @@
               </ul>
 
               <ul class="navbar pull-right">
+                  <li><%= link "logout", to: "/auth/logout" %></li>
               </ul>
           </div>
       </header>
