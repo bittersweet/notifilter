@@ -1,4 +1,6 @@
 defmodule Notifilter.Endpoint do
+  @moduledoc false
+
   use Phoenix.Endpoint, otp_app: :notifilter
 
   socket "/socket", Notifilter.UserSocket

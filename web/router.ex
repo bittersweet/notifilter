@@ -1,4 +1,6 @@
 defmodule Notifilter.Router do
+  @moduledoc false
+
   use Notifilter.Web, :router
 
   alias Notifilter.Authenticator

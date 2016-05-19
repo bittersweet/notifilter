@@ -1,4 +1,6 @@
 defmodule Notifilter.NotifierController do
+  @moduledoc false
+
   use Notifilter.Web, :controller
   require IEx
   import Ecto.Query
@@ -18,8 +20,15 @@ defmodule Notifilter.NotifierController do
     notifier = Repo.get!(Notifier, id)
     applications = Poison.encode!(Elasticsearch.get_fields("application"))
     event_names = Poison.encode!(Elasticsearch.get_fields("name"))
-    {:ok, notifier_as_json} = notifier |> Map.from_struct |> Map.drop([:__meta__]) |> Poison.encode
-    render conn, "show.html", notifier: notifier, notifier_as_json: notifier_as_json, applications: applications, event_names: event_names
+    {:ok, notifier_as_json} = notifier
+    |> Map.from_struct
+    |> Map.drop([:__meta__])
+    |> Poison.encode
+
+    render conn, "show.html", notifier: notifier,
+      notifier_as_json: notifier_as_json,
+      applications: applications,
+      event_names: event_names
   end
 
   def create(conn, %{"notifier" => notifier_params}) do
@@ -29,21 +38,29 @@ defmodule Notifilter.NotifierController do
     case Repo.insert(changeset) do
       {:ok, notifier} ->
         IO.puts("Create worked")
-        IO.inspect(notifier)
       {:error, changeset} ->
         IO.puts("errorrr")
-        IO.inspect(changeset)
     end
 
     render conn
   end
 
   def new(conn, _params) do
-    notifier = %Notifier{application: "", target: "", template: "", event_name: ""}
+    notifier = %Notifier{application: "",
+                         target: "",
+                         template: "",
+                         event_name: ""}
     applications = Poison.encode!(Elasticsearch.get_fields("application"))
     event_names = Poison.encode!(Elasticsearch.get_fields("name"))
-    {:ok, notifier_as_json} = notifier |> Map.from_struct |> Map.drop([:__meta__]) |> Poison.encode
-    render(conn, "new.html", notifier: notifier, applications: applications, event_names: event_names, notifier_as_json: notifier_as_json)
+    {:ok, notifier_as_json} = notifier
+    |> Map.from_struct
+    |> Map.drop([:__meta__])
+    |> Poison.encode
+
+    render(conn, "new.html", notifier: notifier,
+      applications: applications,
+      event_names: event_names,
+      notifier_as_json: notifier_as_json)
   end
 
   def update(conn, %{"id" => id, "notifier" => notifier_params}) do
@@ -51,9 +68,9 @@ defmodule Notifilter.NotifierController do
     changeset = Notifier.changeset(notifier, notifier_params)
     case Repo.update(changeset) do
       {:ok, notifier} ->
-        IO.inspect(notifier)
+        IO.puts("Update worked")
       {:error, changeset} ->
-        IO.inspect(changeset)
+        IO.puts("errorrr")
     end
 
     render conn

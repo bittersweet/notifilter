@@ -1,4 +1,6 @@
 defmodule Notifilter.PageController do
+  @moduledoc false
+
   use Notifilter.Web, :controller
 
   def index(conn, _params) do

@@ -1,4 +1,6 @@
 defmodule Notifilter.ErrorView do
+  @moduledoc false
+
   use Notifilter.Web, :view
 
   def render("404.html", _assigns) do

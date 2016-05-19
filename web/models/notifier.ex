@@ -1,4 +1,6 @@
 defmodule Notifilter.Notifier do
+  @moduledoc false
+
   use Ecto.Model
 
   @derive {Poison.Encoder, except: [:__meta__]}

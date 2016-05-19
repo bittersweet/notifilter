@@ -1,18 +1,23 @@
 defmodule Notifilter.Elasticsearch do
+  @moduledoc """
+  Elasticsearch talks to the ES service and gives back latest events or specific
+  events, all known fields and applications.
+  """
+
   def status do
-    url = "localhost:9200"
-    HTTPoison.get(url, [])
+    "localhost:9200"
+    |> HTTPoison.get([])
     |> handle_response
   end
 
   def latest_events do
-    url = "localhost:9200/notifilter/event/_search"
-    HTTPoison.get(url, [])
+    "localhost:9200/notifilter/event/_search"
+    |> HTTPoison.get([])
     |> handle_response
   end
 
-  def event(event) do
-    url = "localhost:9200/notifilter/event/#{event}"
+  def event(event_id) do
+    url = "localhost:9200/notifilter/event/#{event_id}"
     {:ok, response} = HTTPoison.get(url, [])
     Poison.decode!(response.body)["_source"]
   end
@@ -69,11 +74,11 @@ defmodule Notifilter.Elasticsearch do
     Enum.map(keys, fn(bucket) -> bucket["key"] end)
   end
 
-  def handle_response({ :error, response }) do
-    IO.inspect response
+  def handle_response({:ok, response}) do
+    Poison.decode!(response.body)
   end
 
-  def handle_response({ :ok, response }) do
+  def handle_response({:error, response}) do
     Poison.decode!(response.body)
   end
 end

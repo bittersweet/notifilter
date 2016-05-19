@@ -1,4 +1,6 @@
 defmodule Notifilter.EventController do
+  @moduledoc false
+
   use Notifilter.Web, :controller
 
   alias Notifilter.Elasticsearch

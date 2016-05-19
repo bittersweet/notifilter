@@ -5,6 +5,7 @@ defmodule Google do
   use OAuth2.Strategy
 
   alias OAuth2.Strategy.AuthCode
+  alias OAuth2.Client
 
   defp config do
     [strategy: Google,
@@ -13,27 +14,28 @@ defmodule Google do
      token_url: "/o/oauth2/token"]
   end
 
+  @lint {~r/Refactor/, false}
   def client do
     Application.get_env(:notifilter, Google)
-    |> IO.inspect
     |> Keyword.merge(config())
-    |> OAuth2.Client.new()
+    |> Client.new()
   end
 
   def authorize_url!(params \\ []) do
-    OAuth2.Client.authorize_url!(client(), params)
+    Client.authorize_url!(client(), params)
   end
 
   def get_token!(params \\ [], headers \\ []) do
-    OAuth2.Client.get_token!(client(), params)
+    Client.get_token!(client(), params)
   end
 
-  def authorize_url(client, params) do
-    AuthCode.authorize_url(client, params)
+  def authorize_url(oauth_client, params) do
+    AuthCode.authorize_url(oauth_client, params)
   end
 
-  def get_token(client, params, headers) do
-    client
+  # Will be called via lib/oauth2/client.ex
+  def get_token(oauth_client, params, headers) do
+    oauth_client
     |> put_header("Accept", "application/json")
     |> AuthCode.get_token(params, headers)
   end
