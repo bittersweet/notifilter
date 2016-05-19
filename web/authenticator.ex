@@ -7,9 +7,7 @@ defmodule Notifilter.Authenticator do
     [_, domain] = String.split(user.email, "@")
     IO.puts("Domain: #{domain}")
 
-    # TODO: Update this to use config settings, and gmail is too general of
-    # course.
-    if domain == "gmail.com" do
+    if domain == "springest.com" do
       {:ok}
     else
       {:error}
