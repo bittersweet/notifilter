@@ -23,7 +23,9 @@
               </ul>
 
               <ul class="navbar pull-right">
-                  <li><%= link "logout", to: "/auth/logout" %></li>
+                  <%= if signed_in?(@conn) do %>
+                      <li><%= link "logout", to: "/auth/logout" %></li>
+                  <%= end %>
               </ul>
           </div>
       </header>

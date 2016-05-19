@@ -36,12 +36,8 @@ defmodule Notifilter.Router do
     get "/logout", AuthController, :delete
     get "/google", AuthController, :index
     get "/google/callback", AuthController, :callback
+    get "/require_auth", PageController, :require_auth
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Notifilter do
-  #   pipe_through :api
-  # end
 
   defp assign_current_user(conn, _) do
     assign(conn, :current_user, get_session(conn, :current_user))
@@ -55,7 +51,8 @@ defmodule Notifilter.Router do
         conn
       {:error} ->
         conn
-        |> redirect(to: "/auth/google")
+        |> put_flash(:info, "You are not authorized to view this.")
+        |> redirect(to: "/auth/require_auth")
         |> halt
     end
   end
