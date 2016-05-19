@@ -37,7 +37,8 @@ defmodule Notifilter.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:cowboy, "~> 1.0"},
      {:httpoison, "~> 0.8.2"},
-     {:oauth2, "~> 0.5"}]
+     {:oauth2, "~> 0.5"},
+    {:credo, "~> 0.3", only: [:dev, :test]}]
   end
 
   # Aliases are shortcut or tasks specific to the current project.
