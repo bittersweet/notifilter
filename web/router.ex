@@ -34,9 +34,8 @@ defmodule Notifilter.Router do
     pipe_through :browser
 
     get "/logout", AuthController, :delete
-    # TODO: provider param can be simplified to Google
-    get "/:provider", AuthController, :index
-    get "/:provider/callback", AuthController, :callback
+    get "/google", AuthController, :index
+    get "/google/callback", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.

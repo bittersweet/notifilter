@@ -1,14 +1,15 @@
 defmodule Notifilter.AuthController do
   use Notifilter.Web, :controller
 
-  def index(conn, %{"provider" => provider}) do
-    redirect conn, external: authorize_url!(provider)
+  def index(conn, _params) do
+    authorize_url = Google.authorize_url!(scope: "https://www.googleapis.com/auth/userinfo.email")
+    redirect conn, external: authorize_url
   end
 
-  def callback(conn, %{"provider" => provider, "code" => code}) do
+  def callback(conn, %{"code" => code}) do
     token = Google.get_token!(code: code)
 
-    user = get_user!(provider, token)
+    user = get_user!(token)
 
     conn
     |> put_session(:current_user, user)
@@ -23,11 +24,7 @@ defmodule Notifilter.AuthController do
     |> redirect(to: "/")
   end
 
-  defp authorize_url!("google"), do: Google.authorize_url!(scope: "https://www.googleapis.com/auth/userinfo.email")
-
-  defp get_token!("google", code), do: Google.get_token!(code: code)
-
-  defp get_user!("google", token) do
+  defp get_user!(token) do
     {:ok, %{body: user}} = OAuth2.AccessToken.get(token, "https://www.googleapis.com/plus/v1/people/me/openIdConnect", fields: "id,name")
     IO.puts("get_user!")
     IO.inspect(user)
