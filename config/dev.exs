@@ -35,13 +35,13 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :notifilter, Notifilter.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "markmulder",
-  password: "markmulder",
-  database: "notifilter_development",
-  hostname: "localhost",
+  username: System.get_env("NOTIFILTER_DBUSER"),
+  password: System.get_env("NOTIFILTER_DBPASSWORD"),
+  database: System.get_env("NOTIFILTER_DBNAME"),
+  hostname: System.get_env("NOTIFILTER_DBHOSTNAME"),
   pool_size: 10
 
 config :notifilter, Google,
-  client_id: "157898138924-nsj05uf8gpfj1hj7pibjr6n2cqn4ikm9.apps.googleusercontent.com",
-  client_secret: "an2WQjrNjQYjgOX158uG_XCF",
-  redirect_uri: "http://localhost:4000/auth/google/callback"
+  client_id: System.get_env("NOTIFILTER_GOOGLECLIENTID"),
+  client_secret: System.get_env("NOTIFILTER_GOOGLECLIENTSECRET"),
+  redirect_uri: System.get_env("NOTIFILTER_REDIRECTURI")

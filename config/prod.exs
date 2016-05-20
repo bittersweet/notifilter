@@ -59,3 +59,16 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
+
+config :notifilter, Notifilter.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: System.get_env("NOTIFILTER_DBUSER"),
+  password: System.get_env("NOTIFILTER_DBPASSWORD"),
+  database: System.get_env("NOTIFILTER_DBNAME"),
+  hostname: System.get_env("NOTIFILTER_DBHOSTNAME"),
+  pool_size: 10
+
+config :notifilter, Google,
+  client_id: System.get_env("NOTIFILTER_GOOGLECLIENTID"),
+  client_secret: System.get_env("NOTIFILTER_GOOGLECLIENTSECRET"),
+  redirect_uri: System.get_env("NOTIFILTER_REDIRECTURI")
