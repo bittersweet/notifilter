@@ -45,3 +45,6 @@ config :notifilter, Google,
   client_id: System.get_env("NOTIFILTER_GOOGLECLIENTID"),
   client_secret: System.get_env("NOTIFILTER_GOOGLECLIENTSECRET"),
   redirect_uri: System.get_env("NOTIFILTER_REDIRECTURI")
+
+config :notifilter, Elasticsearch,
+  host: System.get_env("NOTIFILTER_ESHOST")

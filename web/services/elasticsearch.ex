@@ -5,19 +5,19 @@ defmodule Notifilter.Elasticsearch do
   """
 
   def status do
-    "localhost:9200"
+    host()
     |> HTTPoison.get([])
     |> handle_response
   end
 
   def latest_events do
-    "localhost:9200/notifilter/event/_search"
+    "#{host}/notifilter/event/_search"
     |> HTTPoison.get([])
     |> handle_response
   end
 
   def event(event_id) do
-    url = "localhost:9200/notifilter/event/#{event_id}"
+    url = "#{host}/notifilter/event/#{event_id}"
     {:ok, response} = HTTPoison.get(url, [])
     Poison.decode!(response.body)["_source"]
   end
@@ -26,7 +26,7 @@ defmodule Notifilter.Elasticsearch do
   Query ES for all known applications we have seen so far.
   """
   def get_fields(field) do
-    url = "localhost:9200/notifilter/event/_search"
+    url = "#{host}/notifilter/event/_search"
     headers = []
     query = %{
       "size": 0,
@@ -50,7 +50,7 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def applications do
-    url = "localhost:9200/notifilter/event/_search"
+    url = "#{host}/notifilter/event/_search"
     headers = []
     query = %{
       "size": 0,
@@ -80,5 +80,9 @@ defmodule Notifilter.Elasticsearch do
 
   def handle_response({:error, response}) do
     Poison.decode!(response.body)
+  end
+
+  defp host() do
+    Application.get_env(:notifilter, Elasticsearch)[:host]
   end
 end
