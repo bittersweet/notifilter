@@ -60,6 +60,8 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
+config :notifilter, Notifilter.Endpoint,
+  secret_key_base: System.get_env("NOTIFILTER_SECRETKEY")
 
 config :notifilter, Notifilter.Repo,
   adapter: Ecto.Adapters.Postgres,
