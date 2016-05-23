@@ -11,8 +11,20 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def latest_events do
-    "#{host}/notifilter/event/_search"
-    |> HTTPoison.get([])
+    url = "#{host}/notifilter/event/_search"
+    headers = []
+    query = %{
+      "size": 10,
+      "sort": [
+        %{
+          "received_at": %{
+            "order": "desc"
+          }
+        }
+      ]
+    }
+    body = Poison.encode!(query)
+    HTTPoison.post(url, body, headers)
     |> handle_response
   end
 
