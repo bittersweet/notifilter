@@ -17,6 +17,7 @@
     "webpack": "^1.13.0"
   },
   "scripts": {
-    "start": "webpack --watch-stdin --progress --color"
+    "start": "webpack --watch-stdin --progress --color",
+    "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   }
 }
