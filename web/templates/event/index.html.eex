@@ -1,8 +1,24 @@
-Events
-<ul>
+Total events: 
+
+<table>
+    <thead>
+        <th>Application</th>
+        <th>Event</th>
+        <td>Received at</td>
+    </thead>
+    <tbody>
     <%= for event <- @events["hits"]["hits"] do %>
-        <li>
-            <%= link event["_id"], to: event_path(@conn, :show, event["_id"]) %>
-        </li>
-    <%= end  %>
-</ul>
+            <tr>
+                <td>
+                    <%= link event["_source"]["application"], to: event_path(@conn, :show, event["_id"]) %>
+                </td>
+                <td>
+                    <%= link event["_source"]["name"], to: event_path(@conn, :show, event["_id"]) %>
+                </td>
+                <td>
+                    <%= event["_source"]["received_at"] %>
+                </td>
+            </tr>
+        <%= end %>
+    </tbody>
+</table>
