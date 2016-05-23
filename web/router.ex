@@ -30,6 +30,8 @@ defmodule Notifilter.Router do
 
     resources "/notifiers", NotifierController
     resources "/events", EventController
+
+    post "/preview", PreviewController, :preview
   end
 
   scope "/auth", Notifilter do

@@ -4,8 +4,13 @@ import store from './../store';
 
 var DebugOutput = React.createClass({
   render: function() {
-    var rules = this.props.rules;
-    var text = JSON.stringify(rules, null, 2);
+    const { rules, preview } = this.props;
+    if (rules) {
+        var text = JSON.stringify(rules, null, 2);
+    } else {
+        var text = preview;
+    }
+
     return (
       <div>
         <textarea readOnly={'true'} rows="15" cols="60" value={text} />

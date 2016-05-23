@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import NotificationTemplate from './components/notification_template';
 import DebugOutput from './components/debug_output';
+import PreviewButton from './components/preview_button';
 import RuleForm from './components/rule_form';
 import AddRule from './components/add_rule';
 import SubmitButton from './components/submit_button';
@@ -17,7 +18,7 @@ import * as RuleActions from './actions';
 var App = React.createClass({
   render: function() {
     console.log("props in app:", this.props);
-    const { dispatch, rules, application, target, template, eventName } = this.props;
+    const { dispatch, rules, application, target, template, eventName, preview} = this.props;
     const actions = bindActionCreators(RuleActions, dispatch);
 
     if (Object.keys(rules).length == 0) {
@@ -36,6 +37,8 @@ var App = React.createClass({
         <EventSelect eventName={eventName} actions={actions} />
         <TargetField target={target} actions={actions} />
         <NotificationTemplate template={template} actions={actions} />
+        <DebugOutput preview={preview} />
+        <PreviewButton actions={actions} />
         <DebugOutput rules={rules} />
         {ruleElements}
         <AddRule actions={actions} />

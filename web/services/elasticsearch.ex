@@ -12,7 +12,6 @@ defmodule Notifilter.Elasticsearch do
 
   def latest_events do
     url = "#{host}/notifilter/event/_search"
-    headers = []
     query = %{
       "size": 10,
       "sort": [
@@ -24,7 +23,7 @@ defmodule Notifilter.Elasticsearch do
       ]
     }
     body = Poison.encode!(query)
-    HTTPoison.post(url, body, headers)
+    HTTPoison.post(url, body, [])
     |> handle_response
   end
 
@@ -32,6 +31,44 @@ defmodule Notifilter.Elasticsearch do
     url = "#{host}/notifilter/event/#{event_id}"
     {:ok, response} = HTTPoison.get(url, [])
     Poison.decode!(response.body)["_source"]
+  end
+
+  def event_by_name(application, name) do
+    url = "#{host}/notifilter/event/_search"
+    query = %{
+      "size": 1,
+      "query": %{
+        "bool": %{
+          "must": [
+            %{
+              "term": %{
+                "application": application
+              }
+            },
+            %{
+              "term": %{
+                "name": name
+              }
+            }
+          ]
+        }
+      },
+      "sort": [
+        %{
+          "received_at": %{
+            "order": "desc"
+          }
+        }
+      ]
+    }
+    body = Poison.encode!(query)
+    IO.puts("Query:")
+    IO.inspect(query)
+
+    {:ok, response} = HTTPoison.post(url, body, [])
+    result = Poison.decode!(response.body)["hits"]["hits"]
+    IO.inspect(result)
+    Enum.at(result, 0)["_source"]["data"]
   end
 
   @doc """
@@ -86,11 +123,11 @@ defmodule Notifilter.Elasticsearch do
     Enum.map(keys, fn(bucket) -> bucket["key"] end)
   end
 
-  def handle_response({:ok, response}) do
+  defp handle_response({:ok, response}) do
     Poison.decode!(response.body)
   end
 
-  def handle_response({:error, response}) do
+  defp handle_response({:error, response}) do
     Poison.decode!(response.body)
   end
 

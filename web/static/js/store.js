@@ -1,4 +1,5 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 
 function notifier(state = {template: 'templ', rules: []}, action) {
   switch (action.type) {
@@ -48,6 +49,11 @@ function notifier(state = {template: 'templ', rules: []}, action) {
       target: action.target
     });
 
+  case 'UPDATE_PREVIEW_TEMPLATE':
+      return Object.assign({}, state, {
+          preview: action.preview
+      });
+
   default:
     // If we have an unpersisted record, set up some defaults
     if (state.id === null) {
@@ -61,7 +67,7 @@ function notifier(state = {template: 'templ', rules: []}, action) {
   }
 }
 
-let store = createStore(notifier, window.notifier);
+let store = applyMiddleware(thunk)(createStore)(notifier, window.notifier);
 store.subscribe(() =>
   console.log('subscribe', store.getState())
 );
