@@ -30,6 +30,7 @@ var SubmitButton = React.createClass({
     }
     fetch(url, {
       method: jsonMethod,
+      credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
