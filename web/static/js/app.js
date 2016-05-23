@@ -20,7 +20,7 @@ var App = React.createClass({
       // Note we use event_name here but pass it in as props as eventName, we
       // store it as event_name in the database, we can transform it in the
       // controller but this is easier for now.
-    const { dispatch, rules, application, event_name, target, template } = this.props;
+    const { dispatch, rules, application, target, template, eventName } = this.props;
     const actions = bindActionCreators(RuleActions, dispatch);
 
     if (Object.keys(rules).length == 0) {
@@ -36,7 +36,7 @@ var App = React.createClass({
     return (
       <div>
         <ApplicationSelect application={application} actions={actions} />
-        <EventSelect eventName={event_name} actions={actions} />
+        <EventSelect eventName={eventName} actions={actions} />
         <TargetField target={target} actions={actions} />
         <NotificationTemplate template={template} actions={actions} />
         <DebugOutput rules={rules} />
