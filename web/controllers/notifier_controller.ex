@@ -22,7 +22,8 @@ defmodule Notifilter.NotifierController do
     event_names = Poison.encode!(Elasticsearch.get_fields("name"))
     {:ok, notifier_as_json} = notifier
     |> Map.from_struct
-    |> Map.drop([:__meta__])
+    |> Map.put(:eventName, notifier.event_name)
+    |> Map.drop([:event_name, :__meta__])
     |> Poison.encode
 
     render conn, "show.html", notifier: notifier,
@@ -54,7 +55,8 @@ defmodule Notifilter.NotifierController do
     event_names = Poison.encode!(Elasticsearch.get_fields("name"))
     {:ok, notifier_as_json} = notifier
     |> Map.from_struct
-    |> Map.drop([:__meta__])
+    |> Map.put(:eventName, notifier.event_name)
+    |> Map.drop([:event_name, :__meta__])
     |> Poison.encode
 
     render(conn, "new.html", notifier: notifier,
