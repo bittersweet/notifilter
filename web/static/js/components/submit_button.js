@@ -18,18 +18,17 @@ var SubmitButton = React.createClass({
 
     const { application, eventName, target, template, rules } = store.getState();
 
-    var id = window.notifier.id;
-    var jsonMethod ;
+    const id = window.notifier.id;
     if (id) {
       var url = `/notifiers/${id}`;
-      jsonMethod = 'PATCH';
+      method = 'PATCH';
     } else {
       // Not persisted yet
       var url = `/notifiers`;
-      jsonMethod = 'POST';
+      method = 'POST';
     }
     fetch(url, {
-      method: jsonMethod,
+      method: method,
       credentials: 'same-origin',
       headers: {
         'Accept': 'application/json',
