@@ -40,37 +40,33 @@ export function updateTarget(target) {
 }
 
 export function updatePreviewTemplate(preview) {
-    console.log('updatePreviewTemplate called with ', preview);
-    return { type: UPDATE_PREVIEW_TEMPLATE, preview: preview };
+  return { type: UPDATE_PREVIEW_TEMPLATE, preview: preview };
 }
 
 export function getPreview(application, eventName, template) {
-    console.log('in updatePreview application=', application, 'template=', template);
-    return function(dispatch) {
-        const payload = JSON.stringify({
-            application: application,
-            event: eventName,
-            template: template,
-        });
+  return function(dispatch) {
+    const payload = JSON.stringify({
+      application: application,
+      event: eventName,
+      template: template
+    });
 
-        console.log("Posting payload=", payload);
-        const url = '/preview';
-        fetch(url, {
-            method: 'post',
-            credentials: 'same-origin',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: payload,
-        })
-            .then(response => response.json())
-            .then(json => {
-                console.log(json);
-                dispatch(updatePreviewTemplate(json.result))
-            })
-            .catch(exception => {
-                console.log('POST to preview failed:', exception);
-            });
-    };
+    fetch('/preview', {
+      method: 'post',
+      credentials: 'same-origin',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: payload
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log(json);
+        dispatch(updatePreviewTemplate(json.result));
+      })
+      .catch(exception => {
+        console.log('POST to preview failed:', exception);
+      });
+  };
 }
