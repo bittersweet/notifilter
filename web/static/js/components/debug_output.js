@@ -1,14 +1,13 @@
 import React from 'react';
 
-import store from './../store';
-
 var DebugOutput = React.createClass({
   render: function() {
     const { rules, preview } = this.props;
+    var text;
     if (rules) {
-        var text = JSON.stringify(rules, null, 2);
+      text = JSON.stringify(rules, null, 2);
     } else {
-        var text = preview;
+      text = preview;
     }
 
     return (

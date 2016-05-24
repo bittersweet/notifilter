@@ -5,7 +5,7 @@ var TargetField = React.createClass({
     event.preventDefault();
     const target = this.refs.target.value;
     const { actions } = this.props;
-    actions.updateTarget(target)
+    actions.updateTarget(target);
   },
 
   render: function() {

@@ -17,17 +17,19 @@ import * as RuleActions from './actions';
 
 var App = React.createClass({
   render: function() {
-    console.log("props in app:", this.props);
+    console.log('props in app:', this.props);
+
     const { dispatch, rules, application, target, template, eventName, preview} = this.props;
     const actions = bindActionCreators(RuleActions, dispatch);
 
+    var ruleElements;
     if (Object.keys(rules).length == 0) {
-      var ruleElements = null;
+      ruleElements = null;
     } else {
-      var ruleElements = rules.map(function(rule, i) {
+      ruleElements = rules.map(function(rule, i) {
         return (
           <RuleForm key={i} rule={rule} index={i} actions={actions} />
-        )
+        );
       });
     }
 

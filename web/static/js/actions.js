@@ -71,6 +71,6 @@ export function getPreview(application, eventName, template) {
             })
             .catch(exception => {
                 console.log('POST to preview failed:', exception);
-            })
-    }
+            });
+    };
 }

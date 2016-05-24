@@ -1,7 +1,5 @@
 import React from 'react';
 
-import store from './../store';
-
 var NotificationTemplate = React.createClass({
   handleChange: function(event) {
     event.preventDefault();

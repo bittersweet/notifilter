@@ -8,8 +8,8 @@ import store from './../store';
 var SubmitButton = React.createClass({
   getInitialState: function() {
     return {
-      loading: false,
-    }
+      loading: false
+    };
   },
 
   handleClick: function(event) {
@@ -19,12 +19,13 @@ var SubmitButton = React.createClass({
     const { application, eventName, target, template, rules } = store.getState();
 
     const id = window.notifier.id;
+    var url, method;
     if (id) {
-      var url = `/notifiers/${id}`;
+      url = `/notifiers/${id}`;
       method = 'PATCH';
     } else {
       // Not persisted yet
-      var url = `/notifiers`;
+      url = '/notifiers';
       method = 'POST';
     }
     fetch(url, {
@@ -40,7 +41,7 @@ var SubmitButton = React.createClass({
           event_name: eventName,
           target: target,
           template: template,
-          rules: rules,
+          rules: rules
         }
       })
     })
@@ -48,9 +49,9 @@ var SubmitButton = React.createClass({
         this.setState({ loading: false });
       })
       .catch(exception => {
-        console.log('POST failed:', exception)
+        console.log("Posting data went wrong", exception);
         this.setState({ loading: false });
-      })
+      });
   },
 
   render: function() {

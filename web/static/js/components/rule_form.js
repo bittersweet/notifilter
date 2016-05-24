@@ -1,16 +1,17 @@
 import React from 'react';
 
 import RemoveRule from './remove_rule';
-
 import store from './../store';
 
 var RuleForm = React.createClass({
   handleChange: function(event) {
+    event.preventDefault();
+
     var rule = {
       key: this.refs.key.value,
       type: this.refs.type.value,
       setting: this.refs.setting.value,
-      value: this.refs.value.value,
+      value: this.refs.value.value
     };
     // TODO -- simplify via actions.js
     store.dispatch({ type: 'UPDATE_RULE', index: this.props.index, rule: rule });
