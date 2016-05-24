@@ -43,8 +43,10 @@ export function updatePreviewTemplate(preview) {
   return { type: UPDATE_PREVIEW_TEMPLATE, preview: preview };
 }
 
-export function getPreview(application, eventName, template) {
-  return function(dispatch) {
+export function getPreview() {
+  return function(dispatch, getState) {
+    const { application, eventName, template } = getState();
+
     const payload = JSON.stringify({
       application: application,
       event: eventName,
@@ -62,11 +64,10 @@ export function getPreview(application, eventName, template) {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(json);
         dispatch(updatePreviewTemplate(json.result));
       })
       .catch(exception => {
-        console.log('POST to preview failed:', exception);
+        dispatch(updatePreviewTemplate(exception));
       });
   };
 }

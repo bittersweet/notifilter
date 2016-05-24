@@ -1,14 +1,12 @@
 import React from 'react';
-import store from './../store';
 
 var PreviewButton = React.createClass({
   handleClick: function(event) {
     event.preventDefault();
 
     const { actions } = this.props;
-    const { application, template, eventName } = store.getState();
 
-    actions.getPreview(application, eventName, template);
+    actions.getPreview();
   },
 
   render: function() {
