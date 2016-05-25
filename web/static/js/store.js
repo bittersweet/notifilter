@@ -56,6 +56,12 @@ function notifier(state = {template: 'templ', rules: []}, action) {
       });
     }
 
+    case 'UPDATE_PREVIEWING': {
+      return Object.assign({}, state, {
+        isPreviewing: action.isPreviewing
+      });
+    }
+
     case 'UPDATE_PREVIEW_TEMPLATE': {
       return Object.assign({}, state, {
         preview: action.preview
@@ -74,10 +80,13 @@ function notifier(state = {template: 'templ', rules: []}, action) {
         // TODO - remove window global usage here
         return Object.assign({}, state, {
           application: window.options.applications[0],
-          eventName: window.options.eventNames[0]
+          eventName: window.options.eventNames[0],
         });
       }
-      return state;
+      return Object.assign({}, state, {
+        isPreviewing: false,
+        preview: ''
+      });
     }
   }
 }

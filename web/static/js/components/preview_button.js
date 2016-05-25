@@ -4,16 +4,29 @@ var PreviewButton = React.createClass({
   handleClick: function(event) {
     event.preventDefault();
 
-    const { actions } = this.props;
+    const { isPreviewing, actions } = this.props;
 
-    actions.getPreview();
+    if (isPreviewing) {
+      actions.updatePreviewing(false);
+    } else {
+      actions.getPreview();
+    }
   },
 
   render: function() {
+    const { isPreviewing } = this.props;
+
+    var text;
+    if (isPreviewing) {
+      text = 'Edit';
+    } else {
+      text = 'Preview';
+    }
+
     return (
         <div className="submit">
           <button type="submit" onClick={this.handleClick}>
-            Preview
+            {text}
           </button>
         </div>
     );

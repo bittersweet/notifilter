@@ -8,6 +8,7 @@ export const UPDATE_TEMPLATE = 'UPDATE_TEMPLATE';
 export const UPDATE_APPLICATION = 'UPDATE_APPLICATION';
 export const UPDATE_EVENTNAME = 'UPDATE_EVENTNAME';
 export const UPDATE_TARGET = 'UPDATE_TARGET';
+export const UPDATE_PREVIEWING = 'UPDATE_PREVIEWING';
 export const UPDATE_PREVIEW_TEMPLATE = 'UPDATE_PREVIEW_TEMPLATE';
 export const UPDATE_LOADING = 'UPDATE_LOADING';
 
@@ -39,16 +40,18 @@ export function updateTarget(target) {
   return { type: UPDATE_TARGET, target: target };
 }
 
+export function updatePreviewing(isPreviewing) {
+  return { type: UPDATE_PREVIEWING, isPreviewing: isPreviewing };
+}
+
 export function updatePreviewTemplate(preview) {
   return { type: UPDATE_PREVIEW_TEMPLATE, preview: preview };
 }
 
-export function updateLoading(loading) {
-  return { type: UPDATE_LOADING, loading: loading };
-}
-
 export function getPreview() {
   return function(dispatch, getState) {
+    dispatch(updatePreviewing(true));
+
     const { application, eventName, template } = getState();
 
     const payload = JSON.stringify({
@@ -75,6 +78,10 @@ export function getPreview() {
       });
   };
 
+}
+
+export function updateLoading(loading) {
+  return { type: UPDATE_LOADING, loading: loading };
 }
 
 export function persistNotifier() {

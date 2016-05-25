@@ -2,9 +2,8 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import NotificationTemplate from './components/notification_template';
+import Template from './components/template';
 import DebugOutput from './components/debug_output';
-import PreviewButton from './components/preview_button';
 import RuleForm from './components/rule_form';
 import AddRule from './components/add_rule';
 import SubmitButton from './components/submit_button';
@@ -17,7 +16,8 @@ import * as RuleActions from './actions';
 
 var App = React.createClass({
   render: function() {
-    const { dispatch, rules, application, target, template, eventName, preview} = this.props;
+    console.log('props:', this.props);
+    const { dispatch, rules, application, target, template, eventName, isPreviewing, preview} = this.props;
     const actions = bindActionCreators(RuleActions, dispatch);
 
     var ruleElements;
@@ -36,11 +36,11 @@ var App = React.createClass({
         <ApplicationSelect application={application} actions={actions} />
         <EventSelect eventName={eventName} actions={actions} />
         <TargetField target={target} actions={actions} />
-        <NotificationTemplate template={template} actions={actions} />
-        <PreviewButton actions={actions} />
-        <DebugOutput preview={preview} />
-        {ruleElements}
-        <AddRule actions={actions} />
+        <Template template={template} actions={actions} isPreviewing={isPreviewing} preview={preview} />
+        <div className="rules">
+            {ruleElements}
+            <AddRule actions={actions} />
+        </div>
         <SubmitButton actions={actions} />
       </div>
     );
