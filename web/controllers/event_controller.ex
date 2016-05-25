@@ -6,8 +6,10 @@ defmodule Notifilter.EventController do
   alias Notifilter.Elasticsearch
 
   def index(conn, _params) do
-    events = Elasticsearch.latest_events
-    render conn, "index.html", events: events
+    data = Elasticsearch.latest_events
+    total = data["hits"]["total"]
+    events = data["hits"]["hits"]
+    render conn, "index.html", events: events, total_events: total
   end
 
   def show(conn, %{"id" => id}) do

@@ -1,4 +1,4 @@
-Total events: 
+Total events tracked: <%= @total_events %>
 
 <table>
     <thead>
@@ -7,7 +7,7 @@ Total events:
         <td>Received at</td>
     </thead>
     <tbody>
-    <%= for event <- @events["hits"]["hits"] do %>
+    <%= for event <- @events do %>
             <tr>
                 <td>
                     <%= link event["_source"]["application"], to: event_path(@conn, :show, event["_id"]) %>
