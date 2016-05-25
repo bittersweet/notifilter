@@ -12,7 +12,7 @@ var DebugOutput = React.createClass({
 
     return (
       <div>
-        <textarea readOnly={'true'} rows="15" cols="60" value={text} />
+        <textarea readOnly={'true'} rows="5" cols="60" value={text} />
       </div>
     );
   }

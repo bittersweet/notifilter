@@ -1,10 +1,5 @@
 import React from 'react';
 
-import fetch from 'isomorphic-fetch';
-
-// TODO: Find out best way to receive this from parent for better data flow
-import store from './../store';
-
 var SubmitButton = React.createClass({
   getInitialState: function() {
     return {
@@ -14,48 +9,15 @@ var SubmitButton = React.createClass({
 
   handleClick: function(event) {
     event.preventDefault();
-    this.setState({ loading: true });
 
-    const { application, eventName, target, template, rules } = store.getState();
+    const { actions } = this.props;
+    console.log('test');
 
-    const id = window.notifier.id;
-    var url, method;
-    if (id) {
-      url = `/notifiers/${id}`;
-      method = 'PATCH';
-    } else {
-      // Not persisted yet
-      url = '/notifiers';
-      method = 'POST';
-    }
-    fetch(url, {
-      method: method,
-      credentials: 'same-origin',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        notifier: {
-          application: application,
-          event_name: eventName,
-          target: target,
-          template: template,
-          rules: rules
-        }
-      })
-    })
-      .then(() => {
-        this.setState({ loading: false });
-      })
-      .catch(exception => {
-        console.log("Posting data went wrong", exception);
-        this.setState({ loading: false });
-      });
+    actions.persistNotifier();
   },
 
   render: function() {
-    const { loading } = this.state;
+    const { loading } = this.props;
     let text = 'Submit';
     if (loading) {
       text = 'Loading...';

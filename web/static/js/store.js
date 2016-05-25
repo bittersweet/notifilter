@@ -62,6 +62,12 @@ function notifier(state = {template: 'templ', rules: []}, action) {
       });
     }
 
+    case 'UPDATE_LOADING': {
+      return Object.assign({}, state, {
+        loading: action.loading
+      });
+    }
+
     default: {
       // If we have an unpersisted record, set up some defaults
       if (state.id === null) {
