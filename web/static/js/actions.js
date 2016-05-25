@@ -51,6 +51,7 @@ export function updatePreviewTemplate(preview) {
 export function getPreview() {
   return function(dispatch, getState) {
     dispatch(updatePreviewing(true));
+    dispatch(updatePreviewTemplate('Fetching preview...'));
 
     const { application, eventName, template } = getState();
 

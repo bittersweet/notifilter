@@ -24,7 +24,7 @@ var Template = React.createClass({
     }
 
     return (
-        <div>
+        <div id="template_container">
         <PreviewButton isPreviewing={isPreviewing} actions={actions} />
         {templateOrPreview}
         </div>

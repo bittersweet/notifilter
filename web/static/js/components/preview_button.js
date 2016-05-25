@@ -1,5 +1,7 @@
 import React from 'react';
 
+require('../../css/components/template.scss');
+
 var PreviewButton = React.createClass({
   handleClick: function(event) {
     event.preventDefault();
@@ -18,16 +20,14 @@ var PreviewButton = React.createClass({
 
     var text;
     if (isPreviewing) {
-      text = 'Edit';
+      text = 'Write';
     } else {
       text = 'Preview';
     }
 
     return (
-        <div className="submit">
-          <button type="submit" onClick={this.handleClick}>
-            {text}
-          </button>
+        <div className="preview_buttons">
+        <a onClick={this.handleClick}>{text}</a>
         </div>
     );
   }

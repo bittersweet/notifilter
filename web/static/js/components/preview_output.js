@@ -5,7 +5,7 @@ var PreviewOutput = React.createClass({
     const { preview } = this.props;
 
     return (
-        <div>
+        <div id="template_preview">
         { preview }
         </div>
     );

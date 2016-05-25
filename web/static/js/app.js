@@ -37,7 +37,7 @@ var App = React.createClass({
         <EventSelect eventName={eventName} actions={actions} />
         <TargetField target={target} actions={actions} />
         <Template template={template} actions={actions} isPreviewing={isPreviewing} preview={preview} />
-        <div className="rules">
+        <div>
             {ruleElements}
             <AddRule actions={actions} />
         </div>

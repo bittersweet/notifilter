@@ -12,11 +12,8 @@ var NotificationTemplate = React.createClass({
     const { template } = this.props;
 
     return (
-      <div>
-        <label htmlFor="template">Template</label>
         <textarea id="template" value={template} rows="5" ref="template" onChange={this.handleChange}>
         </textarea>
-      </div>
     );
   }
 });
