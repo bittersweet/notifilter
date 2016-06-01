@@ -34,6 +34,7 @@ defmodule Notifilter.Web do
       import Ecto.Query, only: [from: 1, from: 2]
 
       import Notifilter.Router.Helpers
+      import Notifilter.Auth, only: [authenticate_user: 2]
     end
   end
 
@@ -56,6 +57,8 @@ defmodule Notifilter.Web do
   def router do
     quote do
       use Phoenix.Router
+
+      import Notifilter.Auth, only: [authenticate_user: 2]
     end
   end
 
