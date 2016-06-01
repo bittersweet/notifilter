@@ -11,7 +11,7 @@ defmodule Notifilter.Auth do
 
     cond do
       # Use already existing assigns if present (test)
-      user = conn.assigns[:current_user] ->
+      conn.assigns[:current_user] ->
         conn
       true ->
         assign(conn, :current_user, user)
