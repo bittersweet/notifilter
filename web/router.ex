@@ -17,8 +17,7 @@ defmodule Notifilter.Router do
   end
 
   scope "/", Notifilter do
-    pipe_through :browser
-    pipe_through :authenticate_user
+    pipe_through [:browser, :authenticate_user]
 
     get "/", NotifierController, :index
 
