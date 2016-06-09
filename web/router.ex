@@ -27,6 +27,14 @@ defmodule Notifilter.Router do
     post "/preview", PreviewController, :preview
   end
 
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  scope "/api", Notifilter do
+    get "/statistics", StatisticController, :index
+  end
+
   scope "/auth", Notifilter do
     pipe_through :browser
 
