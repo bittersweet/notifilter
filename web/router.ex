@@ -27,11 +27,9 @@ defmodule Notifilter.Router do
     post "/preview", PreviewController, :preview
   end
 
-  pipeline :api do
-    plug :accepts, ["json"]
-  end
-
   scope "/api", Notifilter do
+    pipe_through [:api, :authenticate_api_key]
+
     get "/statistics", StatisticController, :index
   end
 
@@ -42,5 +40,16 @@ defmodule Notifilter.Router do
     get "/google", AuthController, :index
     get "/google/callback", AuthController, :callback
     get "/require_auth", PageController, :require_auth
+  end
+
+  def authenticate_api_key(conn, _opts) do
+    key = Application.get_env(:notifilter, ApiKey)[:key]
+    if conn.params["api_key"] == key do
+      conn
+    else
+      conn
+      |> send_resp(403, "")
+      |> halt
+    end
   end
 end

@@ -48,3 +48,6 @@ config :notifilter, Google,
 
 config :notifilter, Elasticsearch,
   host: System.get_env("NOTIFILTER_ESHOST")
+
+config :notifilter, ApiKey,
+  key: System.get_env("NOTIFILTER_API_KEY")
