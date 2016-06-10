@@ -33,7 +33,7 @@ defmodule Notifilter.Aggregator do
           filter: %{
             range: %{
               received_at: %{
-                gte: "now-7d/d",
+                gte: "now-6d/d",
                 lte: "now/d"
               }
             }
