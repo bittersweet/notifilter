@@ -2,7 +2,7 @@
     window.options = {
         applications: <%= raw @applications %>,
         eventNames: <%= raw @event_names %>,
-        keys: ['name'],
+        keys: <%= raw @event_keys %>,
     };
 
     window.notifier = <%= raw @notifier_as_json %>;

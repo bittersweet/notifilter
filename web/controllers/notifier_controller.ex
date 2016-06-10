@@ -20,6 +20,7 @@ defmodule Notifilter.NotifierController do
     notifier = Repo.get!(Notifier, id)
     applications = Poison.encode!(Elasticsearch.get_fields("application"))
     event_names = Poison.encode!(Elasticsearch.get_fields("name"))
+    event_keys = Poison.encode!(Elasticsearch.get_event_keys())
     {:ok, notifier_as_json} = notifier
     |> Map.from_struct
     |> Map.put(:eventName, notifier.event_name)
@@ -27,9 +28,10 @@ defmodule Notifilter.NotifierController do
     |> Poison.encode
 
     render conn, "show.html", notifier: notifier,
-      notifier_as_json: notifier_as_json,
       applications: applications,
-      event_names: event_names
+      event_names: event_names,
+      event_keys: event_keys,
+      notifier_as_json: notifier_as_json
   end
 
   def create(conn, %{"notifier" => notifier_params}) do
@@ -53,6 +55,7 @@ defmodule Notifilter.NotifierController do
                          event_name: ""}
     applications = Poison.encode!(Elasticsearch.get_fields("application"))
     event_names = Poison.encode!(Elasticsearch.get_fields("name"))
+    event_keys = Poison.encode!(Elasticsearch.get_event_keys())
     {:ok, notifier_as_json} = notifier
     |> Map.from_struct
     |> Map.put(:eventName, notifier.event_name)
@@ -62,6 +65,7 @@ defmodule Notifilter.NotifierController do
     render(conn, "new.html", notifier: notifier,
       applications: applications,
       event_names: event_names,
+      event_keys: event_keys,
       notifier_as_json: notifier_as_json)
   end
 

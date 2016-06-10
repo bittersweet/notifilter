@@ -67,7 +67,6 @@ defmodule Notifilter.Elasticsearch do
 
     {:ok, response} = HTTPoison.post(url, body, [])
     result = Poison.decode!(response.body)["hits"]["hits"]
-    IO.inspect(result)
     Enum.at(result, 0)["_source"]["data"]
   end
 
@@ -121,6 +120,13 @@ defmodule Notifilter.Elasticsearch do
     result = Poison.decode!(response.body)
     keys = result["aggregations"]["applications"]["buckets"]
     Enum.map(keys, fn(bucket) -> bucket["key"] end)
+  end
+
+  def get_event_keys do
+    url = "#{host}/notifilter/_mapping"
+    {:ok, response} = HTTPoison.get(url, [])
+    result = Poison.decode!(response.body)["notifilter"]["mappings"]["event"]["properties"]["data"]["properties"]
+    Map.keys(result)
   end
 
   defp handle_response({:ok, response}) do
