@@ -18,7 +18,7 @@ defmodule Notifilter.Aggregator do
     # Need to assign it to a temp variable instead of doing it in the map
     # because of [1], will be fixed in Elixir 1.3.
     # [1]: https://github.com/elixir-lang/elixir/commit/b2e8c1451ec1315e58c6b15c66e7558c9f8ba1ab,
-    agg_field = "#{field}_aggregation"
+    agg_field = "aggregation_field"
     query_field = "data.#{field}"
 
     query = %{
@@ -48,7 +48,7 @@ defmodule Notifilter.Aggregator do
             min_doc_count: 0
           },
           aggs: %{
-            agg_field => %{
+            "aggregation_field" => %{
               aggregation_type => %{
                 field: query_field
               },
@@ -80,9 +80,9 @@ defmodule Notifilter.Aggregator do
     }
   end
 
-  defp convert_bucket(es_response = %{"extended_by_aggregation" => e}) do
-    data = if es_response["extended_by_aggregation"]["buckets"] do
-      Enum.map(es_response["extended_by_aggregation"]["buckets"], fn(x) -> convert_bucket(x) end)
+  defp convert_bucket(es_response = %{"aggregation_field" => e}) do
+    data = if es_response["aggregation_field"]["buckets"] do
+      Enum.map(es_response["aggregation_field"]["buckets"], fn(x) -> convert_bucket(x) end)
     end
 
     %Notifilter.Statistics{
