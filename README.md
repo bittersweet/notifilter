@@ -19,7 +19,9 @@ People buy products on your website, you send `conversion` events to Notifilter.
 
 ### Architecture & Requirements
 
-Data is received over UDP (fire and forget) and stored in Elasticsearch (for aggregation + statistics type stuff in the future). Postgres is use to store notifiers that contain notification templates (based on [Go templating](https://golang.org/pkg/html/template/)), rules and settings (send to what channel etc).
+Data is received over UDP (fire and forget) by [notifilter-receive](https://github.com/bittersweet/notifilter-receive) and stored in Elasticsearch (for aggregation + statistics type stuff in the future). Postgres is use to store notifiers that contain notification templates (based on [Go templating](https://golang.org/pkg/html/template/)), rules and settings (send to what channel etc).
+
+This repo is a Phoenix + React app where you can configure notifications and view incoming events.
 
 ```
                 persist to ES
@@ -28,5 +30,6 @@ receive data
               \
                 check if there are notifications
                 set up that match this event      - notify channel with configured template
+                and if all rules are satisfied
 
 ```
