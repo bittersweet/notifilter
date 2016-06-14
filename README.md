@@ -1,19 +1,32 @@
 # Notifilter
+Get notified about events
 
-To start your Phoenix app:
+Quick explanation:
 
-  1. Install dependencies with `mix deps.get`
-  2. Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  3. Start Phoenix endpoint with `mix phoenix.server`
+1. Send data to Notifilter
+2. Configure what you want to be notified about and how, optionally set up rules
+3. Get notifications in Slack
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Example:
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+People buy products on your website, you send `conversion` events to Notifilter. You want to give customers that buy a certain package some special attention so you set up a notification and add a rule that the `revenue` needs to be above 100$. All incoming conversions matching the rules will be sent to a Slack channel of your choosing. You've setup the notification with a nice template so you see all relevant data right away and can click on a link to your admin page.
 
-## Learn more
+### Ecosystem
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: http://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+* [notifilter](https://github.com/bittersweet/notifilter) - You're here!
+* [notifilter-receive](https://github.com/bittersweet/notifilter-receive) - Go app that receives UDP, checks rules and notifies
+* [notifilter-rb](https://github.com/bittersweet/notifilter-rb) – Ruby gem to track events
+
+### Architecture & Requirements
+
+Data is received over UDP (fire and forget) and stored in Elasticsearch (for aggregation + statistics type stuff in the future). Postgres is use to store notifiers that contain notification templates (based on [Go templating](https://golang.org/pkg/html/template/)), rules and settings (send to what channel etc).
+
+```
+                persist to ES
+              /
+receive data
+              \
+                check if there are notifications
+                set up that match this event      - notify channel with configured template
+
+```
