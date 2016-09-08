@@ -9,7 +9,7 @@ defmodule Notifilter.Notifier do
     field :application, :string
     field :event_name, :string
     field :template, :string
-    field :rules, {:array, :map}
+    field :rules, {:array, :map}, default: []
     field :notification_type, :string
     field :target, :string
 
