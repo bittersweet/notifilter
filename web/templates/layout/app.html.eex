@@ -19,7 +19,7 @@
               <ul class="navbar">
                   <li><%= link "New notification", to: notifier_path(@conn, :new) %></li>
                   <li><%= link "Latest events", to: event_path(@conn, :index) %></li>
-                  <li><%= link "Statistics", to: "#" %></li>
+                  <li><%= link "Statistics", to: statistic_path(@conn, :index) %></li>
               </ul>
 
               <ul class="navbar pull-right">

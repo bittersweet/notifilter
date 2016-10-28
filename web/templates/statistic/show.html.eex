@@ -1,0 +1,20 @@
+<h1><%= @event %></h1>
+
+total: <%= @data.total %>
+
+<table>
+    <thead>
+        <tr>
+            <th>date</th>
+            <th>amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%= for bucket <- @data.buckets do %>
+            <tr>
+                <td><%= bucket.name %></td>
+                <td><%= bucket.total %></td>
+            </tr>
+        <%= end %>
+    </tbody>
+</table>

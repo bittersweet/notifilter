@@ -24,13 +24,16 @@ defmodule Notifilter.Router do
     resources "/notifiers", NotifierController
     resources "/events", EventController
 
+    get "/statistics", StatisticController, :index
+    get "/statistics/:event", StatisticController, :show
+
     post "/preview", PreviewController, :preview
   end
 
   scope "/api", Notifilter do
     pipe_through [:api, :authenticate_api_key]
 
-    get "/statistics", StatisticController, :index
+    get "/statistics", ApiStatisticController, :index
   end
 
   scope "/auth", Notifilter do

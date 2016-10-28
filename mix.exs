@@ -19,7 +19,7 @@ defmodule Notifilter.Mixfile do
   def application do
     [mod: {Notifilter, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                    :phoenix_ecto, :postgrex, :httpoison, :oauth2]]
+                    :phoenix_ecto, :postgrex, :httpoison, :oauth2, :tzdata]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,6 +38,7 @@ defmodule Notifilter.Mixfile do
      {:cowboy, "~> 1.0"},
      {:httpoison, "~> 0.8.2"},
      {:oauth2, "~> 0.5"},
+     {:timex, "~> 3.1"},
     {:credo, "~> 0.3", only: [:dev, :test]}]
   end
 

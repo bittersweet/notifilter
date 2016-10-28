@@ -21,6 +21,9 @@ defmodule Notifilter.Aggregator do
     agg_field = "aggregation_field"
     query_field = "data.#{field}"
 
+    tendaysago = Timex.shift(Timex.now, days: -10)
+    min_date = Timex.format!(tendaysago, "%F", :strftime)
+
     query = %{
       size: 0,
       query: %{
@@ -33,7 +36,7 @@ defmodule Notifilter.Aggregator do
           filter: %{
             range: %{
               received_at: %{
-                gte: "now-6d/d",
+                gte: "now-10d/d",
                 lte: "now/d"
               }
             }
@@ -45,7 +48,10 @@ defmodule Notifilter.Aggregator do
           date_histogram: %{
             field: "received_at",
             interval: "day",
-            min_doc_count: 0
+            min_doc_count: 0,
+            extended_bounds: %{
+              min: min_date
+            }
           },
           aggs: %{
             "aggregation_field" => %{
