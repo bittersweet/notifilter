@@ -36,6 +36,12 @@ defmodule Notifilter.Router do
     get "/statistics", ApiStatisticController, :index
   end
 
+  scope "/webhooks", Notifilter do
+    pipe_through [:api]
+
+    post "/:application/:event", WebhookController, :receive
+  end
+
   scope "/auth", Notifilter do
     pipe_through :browser
 
