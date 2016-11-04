@@ -10,10 +10,11 @@ defmodule Notifilter.Elasticsearch do
     |> handle_response
   end
 
-  def latest_events do
+  def latest_events(page) do
     url = "#{host}/notifilter/event/_search"
     query = %{
       "size": 10,
+      "from": page * 10,
       "sort": [
         %{
           "received_at": %{
