@@ -1,3 +1,7 @@
+"use strict";
+
+var ExtractText = require("extract-text-webpack-plugin");
+
 module.exports = {
   entry: "./web/static/js/index.js",
   output: {
@@ -9,7 +13,7 @@ module.exports = {
     loaders: [
       {
         test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
+        loader: ExtractText.extract("style", "css!sass"),
       },
       {
         test: /\.js$/,
@@ -20,5 +24,10 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new ExtractText("../css/app.css", {
+      allChunks: true
+    })
+  ],
 };

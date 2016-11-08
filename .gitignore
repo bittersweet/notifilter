@@ -16,4 +16,4 @@ erl_crash.dump
 /config/prod.secret.exs
 
 # Auto generated JS code, we have the source code in web/static/js
-/priv/static/js/app.js
+/priv/static/js/app.jspriv/static/css/app.css

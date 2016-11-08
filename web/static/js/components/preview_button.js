@@ -1,7 +1,5 @@
 import React from 'react';
 
-require('../../css/components/template.scss');
-
 var PreviewButton = React.createClass({
   handleClick: function(event) {
     event.preventDefault();

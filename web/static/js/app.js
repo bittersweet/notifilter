@@ -1,5 +1,6 @@
 import React from 'react';
 
+require('../css/application.scss');
 import { connect } from 'react-redux';
 
 import Template from './components/template';
