@@ -33,7 +33,5 @@
       <div id="main-content">
           <%= render @view_module, @view_template, assigns %>
       </div>
-
-      <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800,900,300italic,400italic,600italic,700italic,800italic,900italic&subset=latin">
   </body>
 </html>
