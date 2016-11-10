@@ -14,6 +14,8 @@ config :notifilter, Notifilter.Endpoint,
   pubsub: [name: Notifilter.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+config :notifilter, ecto_repos: [Notifilter.Repo]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
