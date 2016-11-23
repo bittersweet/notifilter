@@ -5,7 +5,6 @@ Total notifiers: <%= @count %>
         <th>Application</th>
         <th>Event Name</th>
         <th>Target</th>
-        <td>Delete</td>
     </thead>
     <tbody>
         <%= for notifier <- @notifiers do  %>
@@ -13,7 +12,6 @@ Total notifiers: <%= @count %>
                 <td><%= notifier.application %></td>
                 <td><%= link notifier.event_name, to: notifier_path(@conn, :show, notifier) %></td>
                 <td><%= notifier.target %></td>
-                <td><%= link 'delete', to: "#" %></td>
             </tr>
         <%= end %>
     </tbody>
