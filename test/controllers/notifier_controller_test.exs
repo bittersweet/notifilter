@@ -1,5 +1,5 @@
 defmodule Notifilter.NotifierControllerTest do
-  use Notifilter.ConnCase
+  use Notifilter.ConnCase, async: true
 
   def insert_notifier(attrs \\ %{}) do
     changes = Dict.merge(%{
