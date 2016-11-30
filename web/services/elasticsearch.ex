@@ -127,7 +127,7 @@ defmodule Notifilter.Elasticsearch do
     url = "#{host}/notifilter/_mapping"
     {:ok, response} = HTTPoison.get(url, [])
     result = Poison.decode!(response.body)["notifilter"]["mappings"]["event"]["properties"]["data"]["properties"]
-    Map.keys(result)
+    Enum.sort(Map.keys(result))
   end
 
   defp handle_response({:ok, response}) do
