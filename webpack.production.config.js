@@ -11,12 +11,18 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production')
+    }),
+    new ExtractText("../css/app.css", {
+      allChunks: true
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
+    }),
+    new ExtractText("../css/app.css", {
+      allChunks: true
     }),
   ],
   module: {
@@ -35,9 +41,4 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new ExtractText("../css/app.css", {
-      allChunks: true
-    })
-  ],
 };
