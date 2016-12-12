@@ -87,11 +87,13 @@ function notifier(state = {template: 'templ', rules: []}, action) {
         return Object.assign({}, state, {
           application: window.options.applications[0],
           eventName: window.options.eventNames[0],
+          previewOffset: 0,
         });
       }
       return Object.assign({}, state, {
         isPreviewing: false,
-        preview: ''
+        preview: '',
+        previewOffset: 0,
       });
     }
   }
