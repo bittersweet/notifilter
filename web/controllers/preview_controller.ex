@@ -10,8 +10,9 @@ defmodule Notifilter.PreviewController do
     application = params["application"]
     event = params["event"]
     template = params["template"]
+    offset = params["offset"]
 
-    data = Elasticsearch.event_by_name(application, event)
+    data = Elasticsearch.event_by_name(application, event, offset)
     result = Previewer.preview(data, template)
     render conn, "preview.json", result: result
   end

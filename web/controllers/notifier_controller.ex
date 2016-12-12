@@ -24,6 +24,7 @@ defmodule Notifilter.NotifierController do
     {:ok, notifier_as_json} = notifier
     |> Map.from_struct
     |> Map.put(:eventName, notifier.event_name)
+    |> Map.put(:previewOffset, 0)
     |> Map.drop([:event_name, :__meta__])
     |> Poison.encode
 

@@ -74,6 +74,12 @@ function notifier(state = {template: 'templ', rules: []}, action) {
       });
     }
 
+    case 'UPDATE_PREVIEW_OFFSET': {
+      return Object.assign({}, state, {
+        previewOffset: state.previewOffset += action.change
+      });
+    }
+
     default: {
       // If we have an unpersisted record, set up some defaults
       if (state.id === null) {

@@ -18,7 +18,7 @@ import * as RuleActions from './actions';
 var App = React.createClass({
   render: function() {
     console.log('props:', this.props);
-    const { dispatch, rules, application, target, template, eventName, isPreviewing, preview} = this.props;
+    const { dispatch, rules, application, target, template, eventName, isPreviewing, preview, previewOffset} = this.props;
     const actions = bindActionCreators(RuleActions, dispatch);
 
     var ruleElements;
@@ -37,7 +37,7 @@ var App = React.createClass({
         <ApplicationSelect application={application} actions={actions} />
         <EventSelect eventName={eventName} actions={actions} />
         <TargetField target={target} actions={actions} />
-        <Template template={template} actions={actions} isPreviewing={isPreviewing} preview={preview} />
+        <Template template={template} actions={actions} isPreviewing={isPreviewing} preview={preview} previewOffset={previewOffset} />
         <div>
             {ruleElements}
             <AddRule actions={actions} />

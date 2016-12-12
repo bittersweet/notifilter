@@ -11,6 +11,7 @@ export const UPDATE_TARGET = 'UPDATE_TARGET';
 export const UPDATE_PREVIEWING = 'UPDATE_PREVIEWING';
 export const UPDATE_PREVIEW_TEMPLATE = 'UPDATE_PREVIEW_TEMPLATE';
 export const UPDATE_LOADING = 'UPDATE_LOADING';
+export const UPDATE_PREVIEW_OFFSET = 'UPDATE_PREVIEW_OFFSET';
 
 /*
  * action creators
@@ -48,17 +49,22 @@ export function updatePreviewTemplate(preview) {
   return { type: UPDATE_PREVIEW_TEMPLATE, preview: preview };
 }
 
+export function updatePreviewOffset(change) {
+  return { type: UPDATE_PREVIEW_OFFSET, change: change };
+}
+
 export function getPreview() {
   return function(dispatch, getState) {
     dispatch(updatePreviewing(true));
     dispatch(updatePreviewTemplate('Fetching preview...'));
 
-    const { application, eventName, template } = getState();
+    const { application, eventName, template, previewOffset } = getState();
 
     const payload = JSON.stringify({
       application: application,
       event: eventName,
-      template: template
+      template: template,
+      offset: previewOffset
     });
 
     fetch('/preview', {
