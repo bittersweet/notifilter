@@ -17,7 +17,6 @@ import * as RuleActions from './actions';
 
 var App = React.createClass({
   render: function() {
-    console.log('props:', this.props);
     const { dispatch, rules, application, target, template, eventName, isPreviewing, preview, previewOffset} = this.props;
     const actions = bindActionCreators(RuleActions, dispatch);
 

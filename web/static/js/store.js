@@ -100,8 +100,5 @@ function notifier(state = {template: 'templ', rules: []}, action) {
 }
 
 let store = applyMiddleware(thunk)(createStore)(notifier, window.notifier);
-store.subscribe(() =>
-  console.log('subscribe', store.getState())
-);
 
 module.exports = store;
