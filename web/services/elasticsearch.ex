@@ -34,10 +34,11 @@ defmodule Notifilter.Elasticsearch do
     Poison.decode!(response.body)["_source"]
   end
 
-  def event_by_name(application, name) do
+  def event_by_name(application, name, offset) do
     url = "#{host}/notifilter/event/_search"
     query = %{
       "size": 1,
+      "from": offset,
       "query": %{
         "bool": %{
           "must": [

@@ -6,7 +6,7 @@ import PreviewOutput from './preview_output';
 
 var Template = React.createClass({
   render: function() {
-    const { template, actions, isPreviewing, preview } = this.props;
+    const { template, actions, isPreviewing, preview, previewOffset } = this.props;
 
     var templateOrPreview;
     if (isPreviewing) {
@@ -25,7 +25,7 @@ var Template = React.createClass({
 
     return (
         <div id="template_container">
-        <PreviewButton isPreviewing={isPreviewing} actions={actions} />
+        <PreviewButton isPreviewing={isPreviewing} previewOffset={previewOffset} actions={actions} />
         {templateOrPreview}
         </div>
     );
