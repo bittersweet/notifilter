@@ -1,9 +1,8 @@
 import React from 'react';
 
 var PreviewButton = React.createClass({
-  handleClick: function(event) {
+  togglePreview: function(event) {
     event.preventDefault();
-
     const { isPreviewing, actions } = this.props;
 
     if (isPreviewing) {
@@ -37,7 +36,6 @@ var PreviewButton = React.createClass({
     }
   },
 
-
   render: function() {
     const { isPreviewing, previewOffset } = this.props;
 
@@ -62,7 +60,7 @@ var PreviewButton = React.createClass({
 
     return (
         <div className="preview_buttons">
-        <a onClick={this.handleClick} className="preview-button">{text}</a>
+        <a onClick={this.togglePreview} className="preview-button">{text}</a>
         {offsetButtons}
         </div>
     );
