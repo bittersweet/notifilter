@@ -11,7 +11,6 @@ var SubmitButton = React.createClass({
     event.preventDefault();
 
     const { actions } = this.props;
-    console.log('test');
 
     actions.persistNotifier();
   },

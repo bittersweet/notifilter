@@ -111,13 +111,18 @@ export function persistNotifier() {
       }
     });
 
+    var redirectTarget;
+
     if (id) {
+      // Already persisted notifier
       url = `/notifiers/${id}`;
       method = 'PATCH';
     } else {
       // Not persisted yet
       url = '/notifiers';
       method = 'POST';
+
+      redirectTarget = "/";
     }
 
     fetch(url, {
@@ -128,12 +133,13 @@ export function persistNotifier() {
         'Content-Type': 'application/json'
       },
       body: payload
-    })
-      .then(() => {
-        dispatch(updateLoading(false));
-      })
-      .catch(exception => {
-        dispatch(updateLoading(false));
-      });
+    }).then(() => {
+      dispatch(updateLoading(false));
+      if(redirectTarget != null) {
+        window.location.href = '/';
+      }
+    }).catch(exception => {
+      dispatch(updateLoading(false));
+    });
   };
 }
