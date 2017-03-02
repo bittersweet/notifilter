@@ -81,4 +81,14 @@ defmodule Notifilter.NotifierController do
 
     render conn
   end
+
+  def delete(conn, %{"id" => id}) do
+    notifier = Repo.get!(Notifier, id)
+
+    Repo.delete!(notifier)
+
+    conn
+    |> put_flash(:info, "Notifier deleted")
+    |> redirect(to: notifier_path(conn, :index))
+  end
 end

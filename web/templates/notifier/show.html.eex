@@ -12,4 +12,6 @@
     <div id="content"></div>
 </div>
 
+<%= link "delete", to: notifier_path(@conn, :delete, @notifier), method: :delete, data: [confirm: "Are you sure?"] %>
+
 <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
