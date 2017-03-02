@@ -6,10 +6,10 @@ defmodule Notifilter.EventController do
   alias Notifilter.Elasticsearch
 
   def index(conn, params) do
-    if params["page"] do
-      current_page = String.to_integer(params["page"])
+    current_page = if params["page"] do
+      String.to_integer(params["page"])
     else
-      current_page = 0
+      0
     end
     data = Elasticsearch.latest_events(current_page)
     total = data["hits"]["total"]

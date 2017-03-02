@@ -1,7 +1,7 @@
 defmodule Notifilter.StatisticController do
   use Notifilter.Web, :controller
 
-  def index(conn, params) do
+  def index(conn, _params) do
     event_names = Notifilter.Elasticsearch.get_fields("name")
 
     render conn, "index.html", event_names: event_names

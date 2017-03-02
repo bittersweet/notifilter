@@ -11,7 +11,7 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def latest_events(page) do
-    url = "#{host}/notifilter/event/_search"
+    url = "#{host()}/notifilter/event/_search"
     query = %{
       "size": 10,
       "from": page * 10,
@@ -29,13 +29,13 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def event(event_id) do
-    url = "#{host}/notifilter/event/#{event_id}"
+    url = "#{host()}/notifilter/event/#{event_id}"
     {:ok, response} = HTTPoison.get(url, [])
     Poison.decode!(response.body)["_source"]
   end
 
   def event_by_name(application, name, offset) do
-    url = "#{host}/notifilter/event/_search"
+    url = "#{host()}/notifilter/event/_search"
     query = %{
       "size": 1,
       "from": offset,
@@ -76,7 +76,7 @@ defmodule Notifilter.Elasticsearch do
   Query ES for all known applications we have seen so far.
   """
   def get_fields(field) do
-    url = "#{host}/notifilter/event/_search"
+    url = "#{host()}/notifilter/event/_search"
     headers = []
     query = %{
       "size": 0,
@@ -100,7 +100,7 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def applications do
-    url = "#{host}/notifilter/event/_search"
+    url = "#{host()}/notifilter/event/_search"
     headers = []
     query = %{
       "size": 0,
@@ -125,7 +125,7 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def get_event_keys do
-    url = "#{host}/notifilter/_mapping"
+    url = "#{host()}/notifilter/_mapping"
     {:ok, response} = HTTPoison.get(url, [])
     result = Poison.decode!(response.body)["notifilter"]["mappings"]["event"]["properties"]["data"]["properties"]
     Enum.sort(Map.keys(result))

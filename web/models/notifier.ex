@@ -1,7 +1,7 @@
 defmodule Notifilter.Notifier do
   @moduledoc false
 
-  use Ecto.Model
+  use Notifilter.Web, :model
 
   @derive {Poison.Encoder, except: [:__meta__]}
 
@@ -16,10 +16,10 @@ defmodule Notifilter.Notifier do
     # timestamps(inserted_at: :created_at)
   end
 
-  @required_fields ~w(application event_name template rules notification_type target)
-  @optional_fields ~w()
+  @required_fields [:application, :event_name, :template, :rules, :notification_type, :target]
   def changeset(model, params \\ :empty) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, @required_fields)
+    |> validate_required(@required_fields)
   end
 end

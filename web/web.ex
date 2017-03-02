@@ -18,10 +18,11 @@ defmodule Notifilter.Web do
 
   def model do
     quote do
-      use Ecto.Model
+      use Ecto.Schema
 
+      import Ecto
       import Ecto.Changeset
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto.Query
     end
   end
 
@@ -30,8 +31,8 @@ defmodule Notifilter.Web do
       use Phoenix.Controller
 
       alias Notifilter.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto
+      import Ecto.Query
 
       import Notifilter.Router.Helpers
       import Notifilter.Auth, only: [authenticate_user: 2]
@@ -67,8 +68,8 @@ defmodule Notifilter.Web do
       use Phoenix.Channel
 
       alias Notifilter.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 1, from: 2]
+      import Ecto
+      import Ecto.Query
     end
   end
 

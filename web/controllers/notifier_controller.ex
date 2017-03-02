@@ -39,9 +39,9 @@ defmodule Notifilter.NotifierController do
     changeset = Notifier.changeset(%Notifier{}, notifier_params)
 
     case Repo.insert(changeset) do
-      {:ok, notifier} ->
+      {:ok, _} ->
         IO.puts("Create worked")
-      {:error, changeset} ->
+      {:error, _} ->
         IO.puts("errorrr")
     end
 
@@ -73,9 +73,9 @@ defmodule Notifilter.NotifierController do
     notifier = Repo.get!(Notifier, id)
     changeset = Notifier.changeset(notifier, notifier_params)
     case Repo.update(changeset) do
-      {:ok, notifier} ->
+      {:ok, _} ->
         IO.puts("Update worked")
-      {:error, changeset} ->
+      {:error, _} ->
         IO.puts("errorrr")
     end
 
