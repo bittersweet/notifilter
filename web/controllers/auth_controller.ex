@@ -5,7 +5,7 @@ defmodule Notifilter.AuthController do
 
   def index(conn, _params) do
     scope = "https://www.googleapis.com/auth/userinfo.email"
-    authorize_url = Google.authorize_url!(scope: scope)
+    authorize_url = Google.authorize_url!(scope: scope, hd: "springest.com")
     redirect conn, external: authorize_url
   end
 
