@@ -1,5 +1,5 @@
 <h5>Filter on event</h5>
-<%= form_for @conn, event_path(@conn, :index), [as: :search], fn f -> %>
+<%= form_for @conn, event_path(@conn, :index), [method: :get, as: :search], fn f -> %>
   <%= select f, :name, ["All" | @event_names] %>
   <%= submit "Filter" %>
 <% end %>
@@ -30,7 +30,7 @@
 </table>
 
 <%= if @current_page > 0 do %>
-    <%= link "previous page", to: event_path(@conn, :index, page: @current_page - 1) %>
+    <%= link "previous page", to: event_path(@conn, :index, search: %{"name" => "mark"}, page: @current_page - 1) %>
     |
 <%= end %>
-<%= link "next page", to: event_path(@conn, :index, page: @current_page + 1) %>
+<%= link "next page", to: event_path(@conn, :index, search: %{"name" => @name}, page: @current_page + 1) %>
