@@ -21,6 +21,7 @@ defmodule Notifilter.Router do
 
     get "/", NotifierController, :index
 
+    post "/events", EventController, :index
     resources "/notifiers", NotifierController
     resources "/events", EventController
 

@@ -28,6 +28,29 @@ defmodule Notifilter.Elasticsearch do
     |> handle_response
   end
 
+  def latest_events_by_name(name, page) do
+    url = "#{host()}/notifilter/event/_search"
+    query = %{
+      "size": 10,
+      "from": page * 10,
+      "query": %{
+        "term": %{
+          "name": name
+        }
+      },
+      "sort": [
+        %{
+          "received_at": %{
+            "order": "desc"
+          }
+        }
+      ]
+    }
+    body = Poison.encode!(query)
+    HTTPoison.post(url, body, [])
+    |> handle_response
+  end
+
   def event(event_id) do
     url = "#{host()}/notifilter/event/#{event_id}"
     {:ok, response} = HTTPoison.get(url, [])

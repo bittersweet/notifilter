@@ -1,10 +1,16 @@
-Total events tracked: <%= @total_events %>
+<h5>Filter on event</h5>
+<%= form_for @conn, event_path(@conn, :index), [as: :search], fn f -> %>
+  <%= select f, :name, ["All" | @event_names] %>
+  <%= submit "Filter" %>
+<% end %>
+
+<h5>Total events tracked: <%= @total_events %></h5>
 
 <table>
     <thead>
         <th>Application</th>
         <th>Event</th>
-        <td>Received at</td>
+        <th>Received at</th>
     </thead>
     <tbody>
     <%= for event <- @events do %>
