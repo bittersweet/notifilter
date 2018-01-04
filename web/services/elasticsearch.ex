@@ -73,7 +73,7 @@ defmodule Notifilter.Elasticsearch do
   end
 
   @doc """
-  Query ES for all known applications we have seen so far.
+  Return all known values of <field> we have seen so far.
   """
   def get_fields(field) do
     url = "#{host()}/notifilter/event/_search"
@@ -88,8 +88,8 @@ defmodule Notifilter.Elasticsearch do
             "order": %{
               "_term": "asc"
             }
-            }
           }
+        }
       }
     }
     body = Poison.encode!(query)
