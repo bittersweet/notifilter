@@ -13,7 +13,7 @@ defmodule Notifilter do
       # Start the endpoint when the application starts
       supervisor(Notifilter.Endpoint, []),
       # Start the Ecto repository
-      worker(Notifilter.Repo, []),
+      worker(Notifilter.Repo, [])
       # Here you could define other workers and supervisors as children
       # worker(Notifilter.Worker, [arg1, arg2, arg3]),
     ]

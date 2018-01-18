@@ -8,10 +8,12 @@ defmodule Notifilter.Previewer do
     # TODO: make configurable
 
     url = "127.0.0.1:8000/v1/preview"
+
     payload = %{
-      "data": data,
-      "template": template,
+      data: data,
+      template: template
     }
+
     IO.puts("Posting payload to preview endpoint: ")
     IO.inspect(payload)
     body = Poison.encode!(payload)

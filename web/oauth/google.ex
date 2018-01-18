@@ -8,10 +8,12 @@ defmodule Google do
   alias OAuth2.Client
 
   defp config do
-    [strategy: Google,
-     site: "https://accounts.google.com",
-     authorize_url: "/o/oauth2/auth",
-     token_url: "/o/oauth2/token"]
+    [
+      strategy: Google,
+      site: "https://accounts.google.com",
+      authorize_url: "/o/oauth2/auth",
+      token_url: "/o/oauth2/token"
+    ]
   end
 
   @lint {~r/Refactor/, false}

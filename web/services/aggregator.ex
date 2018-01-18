@@ -20,7 +20,7 @@ defmodule Notifilter.Aggregator do
     # [1]: https://github.com/elixir-lang/elixir/commit/b2e8c1451ec1315e58c6b15c66e7558c9f8ba1ab,
     query_field = "data.#{field}"
 
-    tendaysago = Timex.shift(Timex.now, days: -10)
+    tendaysago = Timex.shift(Timex.now(), days: -10)
     min_date = Timex.format!(tendaysago, "%F", :strftime)
 
     query = %{
@@ -58,7 +58,7 @@ defmodule Notifilter.Aggregator do
                 field: query_field
               },
               aggs: %{
-                "total": %{
+                total: %{
                   value_count: %{
                     field: query_field
                   }
@@ -71,6 +71,7 @@ defmodule Notifilter.Aggregator do
     }
 
     body = Poison.encode!(query)
+
     HTTPoison.post(url, body, [])
     |> handle_response
     |> convert
@@ -78,17 +79,19 @@ defmodule Notifilter.Aggregator do
 
   defp convert(es_response) when is_map(es_response) do
     data = es_response["aggregations"]["per_day"]["buckets"]
+
     %Notifilter.Statistics{
       name: "root",
       total: es_response["hits"]["total"],
-      buckets: Enum.map(data, fn(x) -> convert_bucket(x) end)
+      buckets: Enum.map(data, fn x -> convert_bucket(x) end)
     }
   end
 
   defp convert_bucket(es_response = %{"aggregation_field" => _}) do
-    data = if es_response["aggregation_field"]["buckets"] do
-      Enum.map(es_response["aggregation_field"]["buckets"], fn(x) -> convert_bucket(x) end)
-    end
+    data =
+      if es_response["aggregation_field"]["buckets"] do
+        Enum.map(es_response["aggregation_field"]["buckets"], fn x -> convert_bucket(x) end)
+      end
 
     %Notifilter.Statistics{
       name: es_response["key_as_string"],
@@ -100,7 +103,7 @@ defmodule Notifilter.Aggregator do
   defp convert_bucket(es_response = %{"total" => total}) do
     %Notifilter.Statistics{
       name: es_response["key"],
-      total: total["value"],
+      total: total["value"]
     }
   end
 

@@ -13,6 +13,7 @@ defmodule Notifilter.Auth do
       # Use already existing assigns if present (test)
       conn.assigns[:current_user] ->
         conn
+
       true ->
         assign(conn, :current_user, user)
     end
@@ -20,9 +21,11 @@ defmodule Notifilter.Auth do
 
   def authenticate_user(conn, _opts) do
     user = conn.assigns.current_user
+
     case check_user(user) do
       {:ok} ->
         conn
+
       {:error} ->
         conn
         |> put_flash(:info, "You are not authorized to view this.")

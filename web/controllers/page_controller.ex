@@ -4,6 +4,6 @@ defmodule Notifilter.PageController do
   use Notifilter.Web, :controller
 
   def require_auth(conn, _params) do
-    render conn, "require_auth.html"
+    render(conn, "require_auth.html")
   end
 end

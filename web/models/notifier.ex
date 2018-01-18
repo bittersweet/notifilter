@@ -6,12 +6,12 @@ defmodule Notifilter.Notifier do
   @derive {Poison.Encoder, except: [:__meta__]}
 
   schema "notifiers" do
-    field :application, :string
-    field :event_name, :string
-    field :template, :string
-    field :rules, {:array, :map}, default: []
-    field :notification_type, :string
-    field :target, :string
+    field(:application, :string)
+    field(:event_name, :string)
+    field(:template, :string)
+    field(:rules, {:array, :map}, default: [])
+    field(:notification_type, :string)
+    field(:target, :string)
 
     # timestamps(inserted_at: :created_at)
   end
