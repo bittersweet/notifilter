@@ -53,7 +53,6 @@ defmodule Notifilter.Mixfile do
       {:httpoison, "~> 0.8.2"},
       {:oauth2, "~> 0.5"},
       {:timex, "~> 3.1"},
-      {:credo, "~> 0.3", only: [:dev, :test]}
     ]
   end
 
