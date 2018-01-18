@@ -20,10 +20,6 @@ defmodule Notifilter.ChannelCase do
       # Import conveniences for testing with channels
       use Phoenix.ChannelTest
 
-      alias Notifilter.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
-
       # The default endpoint for testing
       @endpoint Notifilter.Endpoint
     end

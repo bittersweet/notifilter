@@ -19,12 +19,9 @@ defmodule Notifilter.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
+      import Notifilter.Router.Helpers
 
       alias Notifilter.Repo
-      import Ecto.Model
-      import Ecto.Query, only: [from: 2]
-
-      import Notifilter.Router.Helpers
 
       # The default endpoint for testing
       @endpoint Notifilter.Endpoint
