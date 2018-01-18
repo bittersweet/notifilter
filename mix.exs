@@ -50,8 +50,8 @@ defmodule Notifilter.Mixfile do
       {:phoenix_html, "~> 2.6.2"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:cowboy, "~> 1.0"},
-      {:httpoison, "~> 0.8.2"},
-      {:oauth2, "~> 0.5"},
+      {:httpoison, "~> 1.0"},
+      {:oauth2, "~> 0.9.2"},
       {:timex, "~> 3.1"},
     ]
   end
