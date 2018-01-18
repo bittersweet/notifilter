@@ -15,6 +15,6 @@ total: <%= @data.total %>
                 <td><%= bucket.name %></td>
                 <td><%= bucket.total %></td>
             </tr>
-        <%= end %>
+        <% end %>
     </tbody>
 </table>

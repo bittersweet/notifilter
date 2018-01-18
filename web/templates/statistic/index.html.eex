@@ -3,5 +3,5 @@
 <ul>
     <%= for event_name <- @event_names do %>
         <li><%= link event_name, to: statistic_path(@conn, :show, event_name) %></li>
-    <%= end %>
+    <% end %>
 </ul>

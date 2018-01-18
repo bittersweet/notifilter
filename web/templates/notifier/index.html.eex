@@ -13,7 +13,7 @@ Total notifiers: <%= @count %>
                 <td><%= link notifier.event_name, to: notifier_path(@conn, :show, notifier) %></td>
                 <td><%= notifier.target %></td>
             </tr>
-        <%= end %>
+        <% end %>
     </tbody>
 </table>
 

@@ -25,12 +25,12 @@
                     <%= event["_source"]["received_at"] %>
                 </td>
             </tr>
-        <%= end %>
+        <% end %>
     </tbody>
 </table>
 
 <%= if @current_page > 0 do %>
     <%= link "previous page", to: event_path(@conn, :index, search: %{"name" => "mark"}, page: @current_page - 1) %>
     |
-<%= end %>
+<% end %>
 <%= link "next page", to: event_path(@conn, :index, search: %{"name" => @name}, page: @current_page + 1) %>
