@@ -15,11 +15,12 @@ defmodule Notifilter.EventController do
 
     name = params["search"]["name"]
 
-    if name != nil && name != "" && name != "All" do
-      data = Elasticsearch.latest_events_by_name(name, current_page)
-    else
-      data = Elasticsearch.latest_events(current_page)
-    end
+    data =
+      if name != nil && name != "" && name != "All" do
+        Elasticsearch.latest_events_by_name(name, current_page)
+      else
+        Elasticsearch.latest_events(current_page)
+      end
 
     total = data["hits"]["total"]
     events = data["hits"]["hits"]
