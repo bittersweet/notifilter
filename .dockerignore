@@ -1,0 +1,11 @@
+.*
+/deps
+/_build
+ecl_Crash.dump
+/node_modules
+/priv/static/*
+/uploads/files/*
+/test
+.git
+.gitignore
+*.sh
