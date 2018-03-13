@@ -29,7 +29,9 @@ defmodule Google do
   # Will be called via lib/oauth2/client.ex
   def get_token!(params \\ [], headers \\ []) do
     # https://github.com/scrogson/oauth2_example/blob/230e8f2f5a33d70c02fc66e80c1e51eb20121edd/web/oauth/github.ex#L29
-    Client.get_token!(client(), Keyword.merge(params, client_secret: client().client_secret))
+    options = [recv_timeout: 20_000]
+    merged_params = Keyword.merge(params, client_secret: client().client_secret)
+    Client.get_token!(client(), merged_params, headers, options)
   end
 
   def authorize_url(oauth_client, params) do
