@@ -16,6 +16,10 @@ defmodule Notifilter.Router do
     plug(:accepts, ["json"])
   end
 
+  scope "/health-check", Notifilter do
+    get("/", HealthcheckController, :index)
+  end
+
   scope "/", Notifilter do
     pipe_through([:browser, :authenticate_user])
 
