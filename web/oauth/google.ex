@@ -16,7 +16,6 @@ defmodule Google do
     ]
   end
 
-  @lint {~r/Refactor/, false}
   def client do
     Application.get_env(:notifilter, Google)
     |> Keyword.merge(config())
