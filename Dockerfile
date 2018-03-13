@@ -37,5 +37,5 @@ RUN mix phoenix.digest
 
 EXPOSE 4000
 
-CMD mix ecto.migrate && mix phoenix.server
+CMD mix phoenix.server
 
