@@ -1,6 +1,8 @@
 # Notifilter
 Get notified about events
 
+[![Build Status](https://travis-ci.org/bittersweet/notifilter.svg?branch=master)](https://travis-ci.org/bittersweet/notifilter)
+
 Quick explanation:
 
 1. Send data to Notifilter
