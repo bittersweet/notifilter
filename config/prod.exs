@@ -14,7 +14,7 @@ use Mix.Config
 config :notifilter, Notifilter.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: System.get_env("NOTIFILTER_HOSTNAME"), port: 443],
-  force_ssl: [hsts: true],
+  force_ssl: [hsts: true, rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json",
   server: true
 
