@@ -13,8 +13,8 @@ use Mix.Config
 # which you typically run after static files are built.
 config :notifilter, Notifilter.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [scheme: "https", host: System.get_env("NOTIFILTER_HOSTNAME"), port: 443],
-  force_ssl: [hsts: true, rewrite_on: [:x_forwarded_proto]],
+  url: [scheme: "https", port: 443],
+  force_ssl: [hsts: true, host: nil, rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json",
   server: true
 
