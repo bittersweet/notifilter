@@ -7,7 +7,8 @@ defmodule Notifilter.Previewer do
   def preview(data, template) do
     # TODO: make configurable
 
-    url = "127.0.0.1:8000/v1/preview"
+    hostname = Application.get_env(:notifilter, Receive)[:hostname]
+    url = "#{hostname}:8000/v1/preview"
 
     payload = %{
       data: data,

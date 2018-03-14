@@ -12,7 +12,8 @@ defmodule Notifilter.WebhookController do
 
     body = Poison.encode!(payload)
     {:ok, socket} = :gen_udp.open(0)
-    :gen_udp.send(socket, {127, 0, 0, 1}, 8000, body)
+    hostname = Application.get_env(:notifilter, Receive)[:hostname]
+    :gen_udp.send(socket, String.to_atom(hostname), 8000, body)
 
     conn
     |> put_status(:ok)
