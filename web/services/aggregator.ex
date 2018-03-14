@@ -8,8 +8,9 @@ defmodule Notifilter.Aggregator do
   """
 
   def status do
+    headers = [{"Content-type", "application/json"}]
     host()
-    |> HTTPoison.get([])
+    |> HTTPoison.get(headers)
     |> handle_response
   end
 
@@ -26,9 +27,9 @@ defmodule Notifilter.Aggregator do
     query = %{
       size: 0,
       query: %{
-        filtered: %{
-          query: %{
-            term: %{
+        bool: %{
+          must: %{
+            match: %{
               name: event_name
             }
           },
@@ -72,7 +73,8 @@ defmodule Notifilter.Aggregator do
 
     body = Poison.encode!(query)
 
-    HTTPoison.post(url, body, [])
+    headers = [{"Content-type", "application/json"}]
+    HTTPoison.post(url, body, headers)
     |> handle_response
     |> convert
   end

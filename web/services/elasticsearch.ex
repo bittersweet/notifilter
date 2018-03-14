@@ -5,8 +5,9 @@ defmodule Notifilter.Elasticsearch do
   """
 
   def status do
+    headers = [{"Content-type", "application/json"}]
     host()
-    |> HTTPoison.get([])
+    |> HTTPoison.get(headers)
     |> handle_response
   end
 
@@ -27,7 +28,8 @@ defmodule Notifilter.Elasticsearch do
 
     body = Poison.encode!(query)
 
-    HTTPoison.post(url, body, [])
+    headers = [{"Content-type", "application/json"}]
+    HTTPoison.post(url, body, headers)
     |> handle_response
   end
 
@@ -53,13 +55,15 @@ defmodule Notifilter.Elasticsearch do
 
     body = Poison.encode!(query)
 
-    HTTPoison.post(url, body, [])
+    headers = [{"Content-type", "application/json"}]
+    HTTPoison.post(url, body, headers)
     |> handle_response
   end
 
   def event(event_id) do
     url = "#{host()}/notifilter/event/#{event_id}"
-    {:ok, response} = HTTPoison.get(url, [])
+    headers = [{"Content-type", "application/json"}]
+    {:ok, response} = HTTPoison.get(url, headers)
     Poison.decode!(response.body)["_source"]
   end
 
@@ -95,10 +99,9 @@ defmodule Notifilter.Elasticsearch do
     }
 
     body = Poison.encode!(query)
-    IO.puts("Query:")
-    IO.inspect(query)
 
-    {:ok, response} = HTTPoison.post(url, body, [])
+    headers = [{"Content-type", "application/json"}]
+    {:ok, response} = HTTPoison.post(url, body, headers)
     result = Poison.decode!(response.body)["hits"]["hits"]
     Enum.at(result, 0)["_source"]["data"]
   end
@@ -108,7 +111,6 @@ defmodule Notifilter.Elasticsearch do
   """
   def get_fields(field) do
     url = "#{host()}/notifilter/event/_search"
-    headers = []
 
     query = %{
       size: 0,
@@ -117,7 +119,9 @@ defmodule Notifilter.Elasticsearch do
           terms: %{
             field: field,
             # Make sure we get all results, not limited
-            size: 0,
+            # ES changed the option of setting size to 0, so I'm using a
+            # "large" number for now.
+            size: 1000,
             order: %{
               _term: "asc"
             }
@@ -127,6 +131,7 @@ defmodule Notifilter.Elasticsearch do
     }
 
     body = Poison.encode!(query)
+    headers = [{"Content-type", "application/json"}]
     {:ok, response} = HTTPoison.post(url, body, headers)
     result = Poison.decode!(response.body)
     keys = result["aggregations"]["field"]["buckets"]
@@ -135,7 +140,6 @@ defmodule Notifilter.Elasticsearch do
 
   def applications do
     url = "#{host()}/notifilter/event/_search"
-    headers = []
 
     query = %{
       size: 0,
@@ -155,6 +159,7 @@ defmodule Notifilter.Elasticsearch do
 
     body = Poison.encode!(query)
 
+    headers = [{"Content-type", "application/json"}]
     {:ok, response} = HTTPoison.post(url, body, headers)
     result = Poison.decode!(response.body)
     keys = result["aggregations"]["applications"]["buckets"]
@@ -163,7 +168,8 @@ defmodule Notifilter.Elasticsearch do
 
   def get_event_keys do
     url = "#{host()}/notifilter/_mapping"
-    {:ok, response} = HTTPoison.get(url, [])
+    headers = [{"Content-type", "application/json"}]
+    {:ok, response} = HTTPoison.get(url, headers)
 
     result =
       Poison.decode!(response.body)["notifilter"]["mappings"]["event"]["properties"]["data"][

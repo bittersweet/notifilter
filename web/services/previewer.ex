@@ -16,7 +16,6 @@ defmodule Notifilter.Previewer do
     }
 
     IO.puts("Posting payload to preview endpoint: ")
-    IO.inspect(payload)
     body = Poison.encode!(payload)
 
     {:ok, response} = HTTPoison.post(url, body, [])
