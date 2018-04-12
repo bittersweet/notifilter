@@ -30,7 +30,7 @@
 </table>
 
 <%= if @current_page > 0 do %>
-    <%= link "previous page", to: event_path(@conn, :index, search: %{"name" => "mark"}, page: @current_page - 1) %>
-    |
+  <%= link "previous page", to: event_path(@conn, :index, search: %{"name" => @name}, page: @current_page - 1) %>
+  |
 <% end %>
 <%= link "next page", to: event_path(@conn, :index, search: %{"name" => @name}, page: @current_page + 1) %>
