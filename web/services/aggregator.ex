@@ -14,6 +14,13 @@ defmodule Notifilter.Aggregator do
     |> handle_response
   end
 
+  def query(body) do
+    url = "#{host()}/notifilter/event/_search?pretty=true"
+    headers = [{"Content-type", "application/json"}]
+    {:ok, response} = HTTPoison.post(url, body, headers)
+    response.body
+  end
+
   def aggregate(event_name, aggregation_type, field) do
     url = "#{host()}/notifilter/event/_search"
     # Need to assign it to a temp variable instead of doing it in the map

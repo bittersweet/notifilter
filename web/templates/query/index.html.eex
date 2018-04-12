@@ -1,0 +1,15 @@
+queries
+
+<%= form_tag("/queries", method: :post) do %>
+  <%= textarea :query, :body, placeholder: "query", value: @query %>
+  <%= submit "run", id: "submit_query" %>
+<% end %>
+
+<h1>result</h1>
+<pre><%= @result %></pre>
+
+<style>
+  #query_body{
+    height: 10em;
+  }
+</style>

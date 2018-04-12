@@ -31,6 +31,9 @@ defmodule Notifilter.Router do
     get("/statistics", StatisticController, :index)
     get("/statistics/:event", StatisticController, :show)
 
+    get("/queries", QueryController, :index)
+    post("/queries", QueryController, :perform)
+
     post("/preview", PreviewController, :preview)
   end
 
