@@ -4,7 +4,7 @@ defmodule Notifilter.QueryController do
   use Notifilter.Web, :controller
 
   def index(conn, _params) do
-    render(conn, "index.html", query: nil, result: nil)
+    render(conn, "index.html", query: "{}", result: nil)
   end
 
   def perform(conn, %{"query" => query}) do
