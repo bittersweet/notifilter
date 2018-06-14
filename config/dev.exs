@@ -46,11 +46,8 @@ config :notifilter, Google,
   client_secret: System.get_env("NOTIFILTER_GOOGLECLIENTSECRET"),
   redirect_uri: System.get_env("NOTIFILTER_REDIRECTURI")
 
-config :notifilter, Elasticsearch,
-  host: System.get_env("NOTIFILTER_ESHOST")
+config :notifilter, Elasticsearch, host: System.get_env("NOTIFILTER_ESHOST")
 
-config :notifilter, Receive,
-  hostname: System.get_env("NOTIFILTER_RECEIVE_HOSTNAME")
+config :notifilter, Receive, hostname: System.get_env("NOTIFILTER_RECEIVE_HOSTNAME")
 
-config :notifilter, ApiKey,
-  key: System.get_env("NOTIFILTER_API_KEY")
+config :notifilter, ApiKey, key: System.get_env("NOTIFILTER_API_KEY")

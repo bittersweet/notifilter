@@ -61,8 +61,7 @@ config :logger, level: :info
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
-config :notifilter, Notifilter.Endpoint,
-  secret_key_base: System.get_env("NOTIFILTER_SECRETKEY")
+config :notifilter, Notifilter.Endpoint, secret_key_base: System.get_env("NOTIFILTER_SECRETKEY")
 
 config :notifilter, Notifilter.Repo,
   adapter: Ecto.Adapters.Postgres,
@@ -77,11 +76,8 @@ config :notifilter, Google,
   client_secret: System.get_env("NOTIFILTER_GOOGLECLIENTSECRET"),
   redirect_uri: System.get_env("NOTIFILTER_REDIRECTURI")
 
-config :notifilter, Elasticsearch,
-  host: System.get_env("NOTIFILTER_ESHOST")
+config :notifilter, Elasticsearch, host: System.get_env("NOTIFILTER_ESHOST")
 
-config :notifilter, Receive,
-  hostname: System.get_env("NOTIFILTER_RECEIVE_HOSTNAME")
+config :notifilter, Receive, hostname: System.get_env("NOTIFILTER_RECEIVE_HOSTNAME")
 
-config :notifilter, ApiKey,
-  key: System.get_env("NOTIFILTER_API_KEY")
+config :notifilter, ApiKey, key: System.get_env("NOTIFILTER_API_KEY")

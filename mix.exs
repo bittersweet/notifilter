@@ -52,7 +52,7 @@ defmodule Notifilter.Mixfile do
       {:cowboy, "~> 1.0"},
       {:httpoison, "~> 1.0"},
       {:oauth2, "~> 0.9.2"},
-      {:timex, "~> 3.1"},
+      {:timex, "~> 3.1"}
     ]
   end
 
