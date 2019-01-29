@@ -28,7 +28,7 @@ defmodule Notifilter.AuthController do
   end
 
   defp get_user!(token) do
-    token_url = "https://www.googleapis.com/plus/v1/people/me/openIdConnect"
+    token_url = "https://www.googleapis.com/oauth2/v3/userinfo"
     {:ok, %{body: user}} = OAuth2.Client.get(token, token_url, fields: "id,name")
 
     %{name: user["name"], avatar: user["picture"], email: user["email"]}
