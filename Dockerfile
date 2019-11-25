@@ -1,27 +1,24 @@
-FROM elixir:1.4.2
+FROM elixir:1.9
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 ENV MIX_ENV="prod"
 ENV PORT=4000
 
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash -
-RUN apt-get install -y -q nodejs
+RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - && \
+    apt-get install -yq --no-install-recommends nodejs
 
-RUN echo $(node -v)
-RUN echo $(npm -v)
-
-RUN mix local.hex --force
-RUN mix local.rebar --force
+RUN mix local.hex --force && \
+    mix local.rebar --force
 
 RUN mkdir /app
 WORKDIR /app
 
 # Install Elixir dependencies
 ADD mix.* ./
-RUN mix local.rebar
-RUN mix local.hex --force
-RUN mix deps.get
+RUN mix local.rebar && \
+    mix local.hex --force && \
+    mix deps.get
 
 # Install Node Deps
 ADD package.json ./
@@ -32,8 +29,8 @@ ADD . .
 RUN mix compile
 
 # Assets
-RUN NODE_ENV=production node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js
-RUN mix phoenix.digest
+RUN NODE_ENV=production node_modules/webpack/bin/webpack.js -p --config webpack.production.config.js && \
+    mix phoenix.digest
 
 EXPOSE 4000
 
