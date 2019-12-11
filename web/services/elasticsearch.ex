@@ -12,7 +12,7 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def latest_events(page) do
-    url = "#{host()}/notifilter/event/_search"
+    url = "#{host()}/notifilter/_search"
 
     query = %{
       size: 10,
@@ -34,7 +34,7 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def latest_events_by_name(name, page) do
-    url = "#{host()}/notifilter/event/_search"
+    url = "#{host()}/notifilter/_search"
 
     query = %{
       size: 10,
@@ -61,14 +61,14 @@ defmodule Notifilter.Elasticsearch do
   end
 
   def event(event_id) do
-    url = "#{host()}/notifilter/event/#{event_id}"
+    url = "#{host()}/notifilter/_doc/#{event_id}"
     headers = [{"Content-type", "application/json"}]
     {:ok, response} = HTTPoison.get(url, headers)
     Poison.decode!(response.body)["_source"]
   end
 
   def event_by_name(application, name, offset) do
-    url = "#{host()}/notifilter/event/_search"
+    url = "#{host()}/notifilter/_search"
 
     query = %{
       size: 1,
@@ -110,7 +110,7 @@ defmodule Notifilter.Elasticsearch do
   Return all known values of <field> we have seen so far.
   """
   def get_fields(field) do
-    url = "#{host()}/notifilter/event/_search"
+    url = "#{host()}/notifilter/_search"
 
     query = %{
       size: 0,
@@ -135,11 +135,12 @@ defmodule Notifilter.Elasticsearch do
     {:ok, response} = HTTPoison.post(url, body, headers)
     result = Poison.decode!(response.body)
     keys = result["aggregations"]["field"]["buckets"]
+    IO.inspect(result)
     Enum.map(keys, fn bucket -> bucket["key"] end)
   end
 
   def applications do
-    url = "#{host()}/notifilter/event/_search"
+    url = "#{host()}/notifilter/_search"
 
     query = %{
       size: 0,
@@ -172,7 +173,7 @@ defmodule Notifilter.Elasticsearch do
     {:ok, response} = HTTPoison.get(url, headers)
 
     result =
-      Poison.decode!(response.body)["notifilter"]["mappings"]["event"]["properties"]["data"][
+      Poison.decode!(response.body)["notifilter"]["mappings"]["properties"]["data"][
         "properties"
       ]
 

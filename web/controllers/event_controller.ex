@@ -22,7 +22,7 @@ defmodule Notifilter.EventController do
         Elasticsearch.latest_events(current_page)
       end
 
-    total = data["hits"]["total"]
+    total = data["hits"]["total"]["value"]
     events = data["hits"]["hits"]
     event_names = Elasticsearch.get_fields("name")
 
